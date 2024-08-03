@@ -2,7 +2,7 @@ import DataCenter from "../db/dataCenter";
 import Seller from "../model/seller";
 
 export default class SellerController {
-    private static datacenter: DataCenter = new DataCenter();
+    private static datacenter: DataCenter = DataCenter.getInstance();
 
     public static registerNewSeller(Seller: Seller) {
         this.datacenter.addNewSeller(Seller);
@@ -10,5 +10,9 @@ export default class SellerController {
 
     public static listAllSellers() {
         this.datacenter.getSellers();
+    }
+
+    public static getSellerById(id: number): Seller {
+        return this.datacenter.getSellers().find(seller => seller.getId() === id) as Seller;
     }
 }
