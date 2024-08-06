@@ -9,10 +9,12 @@ export default class SellerController {
     }
 
     public static listAllSellers() {
-        this.datacenter.getSellers();
+        console.log(this.datacenter.getSellers());
     }
 
     public static getSellerById(id: number): Seller {
-        return this.datacenter.getSellers().find(seller => seller.getId() === id) as Seller;
+        return this.datacenter
+            .getSellers()
+            .find((seller) => seller.getId() === id) as Seller;
     }
 }

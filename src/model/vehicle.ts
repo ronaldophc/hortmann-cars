@@ -2,7 +2,7 @@ import Helper from "../utils/helper";
 import { Entity } from "./entity";
 import { VehicleType } from "./vehicleType";
 
-export default class Vehicle implements Entity {
+export default abstract class Vehicle implements Entity {
 
     public id: number = Helper.generateId();
     public brand: string;
@@ -10,13 +10,19 @@ export default class Vehicle implements Entity {
     public year: number;
     public value: number;
     private type: VehicleType;
+    private mileage;
 
-    constructor(brand: string, model: string, year: number, value: number, type: VehicleType) {
+    constructor(brand: string, model: string, year: number, value: number, type: VehicleType, mileage?: number) {
         this.type = type;
         this.brand = brand;
         this.model = model;
         this.year = year;
         this.value = value;
+        this.mileage = mileage;
+    }
+
+    getType(): VehicleType {
+        return this.type;
     }
 
     public getId(): number {
@@ -55,9 +61,5 @@ export default class Vehicle implements Entity {
         this.value = value;
     }
 
-    public getType(): VehicleType {
-        return this.type;
-    }
-    
 
 }

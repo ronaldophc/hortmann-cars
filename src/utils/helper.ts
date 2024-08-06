@@ -18,13 +18,14 @@ export default class Helper {
 
     public static getVehicleType(type: string) {
         switch(type) {
-            case "CAR":
+            case "CARRO":
                 return VehicleType.CAR;
-            case "MOTORCYCLE":
+            case "MOTO":
                 return VehicleType.MOTORCYCLE;
-            case "TRUCK":
+            case "CAMINHAO":
                 return VehicleType.TRUCK;
+            default:
+                throw new Error("Tipo de veículo inválido.");
         }
-        return VehicleType.CAR;
     }
 }

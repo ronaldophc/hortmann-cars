@@ -9,7 +9,7 @@ export default class BuyerController {
     }
 
     public static listAllBuyers() {
-        this.datacenter.getBuyers();
+        console.log(this.datacenter.getBuyers());
     }
 
     public static getBuyerById(id: number): Buyer {

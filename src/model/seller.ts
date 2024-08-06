@@ -12,14 +12,8 @@ export default class Seller extends Person {
         return this.comission;
     }
 
-    public setBalance(comission: number): void;
-    public setBalance(comission: string): void;
-    public setBalance(comission: number | string): void {
-        if (typeof comission === "number") {
-            this.comission = comission;
-        } else if (typeof comission === "string") {
-            this.comission = parseFloat(comission);
-        }
+    public setBalance(comission: number): void {
+        this.comission = comission;
     }
 
     public describe(): string {

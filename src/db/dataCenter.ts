@@ -1,20 +1,27 @@
 import Buyer from "../model/buyer";
+import Car from "../model/car";
+import Motorcycle from "../model/motorcycle";
 import Sale from "../model/sale";
 import Seller from "../model/seller";
+import Truck from "../model/truck";
 import Vehicle from "../model/vehicle";
 
 export default class DataCenter {
     private static instance: DataCenter;
-    private vehicles: Vehicle[];
+    private cars: Car[];
+    private motorcyles: Motorcycle[];
+    private trucks: Truck[];
     private buyers: Buyer[];
     private sellers: Seller[];
     private sales: Sale[];
 
     constructor() {
-        this.vehicles = [];
+        this.cars = [];
+        this.motorcyles = [];
         this.buyers = [];
         this.sellers = [];
         this.sales = [];
+        this.trucks = [];
     }
 
     public static getInstance(): DataCenter {
@@ -23,20 +30,49 @@ export default class DataCenter {
         }
         return DataCenter.instance;
     }
-
-    public printAll(): void {
-        console.log(this.vehicles);
-        console.log(this.buyers);
-        console.log(this.sellers);
-        console.log(this.sales);
+    
+    public addNewVehicle(vehicle: Car | Motorcycle | Truck): void {
+        if (vehicle instanceof Car) {
+            this.cars.push(vehicle);
+            return;
+        }
+        if(vehicle instanceof Motorcycle) {
+            this.motorcyles.push(vehicle);
+            return;
+        }
+        if(vehicle instanceof Truck) {
+            this.trucks.push(vehicle);
+            return;
+        }
     }
 
-    public addNewVehicle(vehicle: Vehicle): void {
-        this.vehicles.push(vehicle);
+    public getAllVehicles(): Vehicle[] {
+        return [...this.cars, ...this.motorcyles, ...this.trucks];
     }
 
-    public getVehicles(): Vehicle[] {
-        return this.vehicles;
+    public getCars(): Car[] {
+        return this.cars;
+    }
+
+    public getVehiclebyId(id: number): Car | Motorcycle | Truck {
+        if(this.cars.find(cars => cars.getId() === id)) {
+            return this.cars.find(cars => cars.getId() === id) as Car;
+        }
+        if(this.motorcyles.find(motorcycles => motorcycles.getId() === id)) {
+            return this.motorcyles.find(motorcycles => motorcycles.getId() === id) as Motorcycle;
+        }
+        if(this.trucks.find(trucks => trucks.getId() === id)) {
+            return this.trucks.find(trucks => trucks.getId() === id) as Truck;
+        }
+        throw new Error("Vehicle not found");
+    }
+
+    public getMotorcycles(): Motorcycle[] {
+        return this.motorcyles;
+    }
+
+    public getTrucks(): Truck[] {
+        return this.trucks;
     }
 
     public addNewBuyer(buyer: Buyer): void {
@@ -61,10 +97,6 @@ export default class DataCenter {
 
     public getSales(): Sale[] {
         return this.sales;
-    }
-
-    public getVehicleById(id: number): Vehicle {
-        return this.vehicles.find(vehicle => vehicle.getId() === id) as Vehicle;
     }
 
     public getBuyerById(id: number): Buyer {
