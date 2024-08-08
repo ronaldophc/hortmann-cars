@@ -1,6 +1,7 @@
 import Buyer from "../model/buyer";
 import Car from "../model/car";
 import Motorcycle from "../model/motorcycle";
+import PersonalError from "../model/personalError";
 import Sale from "../model/sale";
 import Seller from "../model/seller";
 import Truck from "../model/truck";
@@ -15,7 +16,7 @@ export default class DataCenter {
     private sellers: Seller[];
     private sales: Sale[];
 
-    constructor() {
+    private constructor() {
         this.cars = [];
         this.motorcyles = [];
         this.buyers = [];
@@ -64,8 +65,10 @@ export default class DataCenter {
         if(this.trucks.find(trucks => trucks.getId() === id)) {
             return this.trucks.find(trucks => trucks.getId() === id) as Truck;
         }
-        throw new Error("Vehicle not found");
+        throw new PersonalError("Vehicle not found");
     }
+
+    
 
     public getMotorcycles(): Motorcycle[] {
         return this.motorcyles;

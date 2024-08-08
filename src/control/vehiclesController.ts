@@ -6,6 +6,18 @@ import Truck from "../model/truck";
 export default class VehiclesController {
     private static datacenter: DataCenter = DataCenter.getInstance();
 
+    public static createNewCar(brand: string, model: string, year: number, value: number, mileage?: number): Car {
+        return new Car(brand, model, year, value, mileage);
+    }
+
+    public static createNewTruck(brand: string, model: string, year: number, value: number, mileage?: number): Truck {
+        return new Truck(brand, model, year, value, mileage);
+    }
+
+    public static createNewMotorcycle(brand: string, model: string, year: number, value: number, mileage?: number): Motorcycle {
+        return new Motorcycle(brand, model, year, value, mileage);
+    }
+
     public static registerNewVehicle(vehicle: Car | Truck | Motorcycle): void {
         this.datacenter.addNewVehicle(vehicle);
     }

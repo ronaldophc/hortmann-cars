@@ -4,6 +4,10 @@ import Buyer from "../model/buyer";
 export default class BuyerController {
     private static datacenter: DataCenter = DataCenter.getInstance();
 
+    public static createNewBuyer(name: string, money: number) {
+        return new Buyer(name, money);
+    }
+
     public static registerNewBuyer(buyer: Buyer) {
         this.datacenter.addNewBuyer(buyer);
     }

@@ -21,9 +21,7 @@ export default abstract class Vehicle implements Entity {
         this.mileage = mileage;
     }
 
-    getType(): VehicleType {
-        return this.type;
-    }
+    public abstract getType(): VehicleType;
 
     public getId(): number {
         return this.id;
