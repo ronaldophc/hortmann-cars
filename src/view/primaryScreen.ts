@@ -10,6 +10,7 @@ import Motorcycle from "../model/motorcycle";
 import Truck from "../model/truck";
 import Car from "../model/car";
 import VehiclesController from "../control/vehiclesController";
+import SaleController from "../control/saleController";
 
 export default class PrimaryScreen {
     private prompt = promptSync();
@@ -130,31 +131,13 @@ export default class PrimaryScreen {
         }
         let newVehicle;
         if (vtype === VehicleType.MOTORCYCLE) {
-            newVehicle = new Motorcycle(
-                brand,
-                model,
-                year,
-                value,
-                mileage || 0
-            );
+            newVehicle = VehiclesController.createNewMotorcycle(brand, model, year, value, mileage || 0);
         }
         if (vtype === VehicleType.TRUCK) {
-            newVehicle = new Truck(
-                brand,
-                model,
-                year,
-                value,
-                mileage || 0
-            );
+            newVehicle = VehiclesController.createNewTruck(brand, model, year, value, mileage || 0);
         }
         if (vtype === VehicleType.CAR) {
-            newVehicle = new Car(
-                brand,
-                model,
-                year,
-                value,
-                mileage || 0
-            );
+            newVehicle = VehiclesController.createNewCar(brand, model, year, value, mileage || 0);
         }
         if (newVehicle) {
             VehiclesController.registerNewVehicle(newVehicle);
@@ -175,7 +158,7 @@ export default class PrimaryScreen {
         const money = Number(
             this.prompt("Digite o dinheiro que o Comprador tem:\n")
         );
-        const buyer = new Buyer(name, money);
+        const buyer = BuyerController.createNewBuyer(name, money);
         BuyerController.registerNewBuyer(buyer);
         BuyerController.listAllBuyers();
     }
@@ -196,9 +179,7 @@ export default class PrimaryScreen {
         const buyer = BuyerController.getBuyerById(buyerId);
         console.log(buyer);
 
-        const sale = new Sale(new Date(), seller, car, buyer);
+        const sale = SaleController.createNewSale(seller, buyer, car);
         console.log(sale.infoPurchase());
-        console.log("-----------------------");
-        console.log(sale);
     }
 }

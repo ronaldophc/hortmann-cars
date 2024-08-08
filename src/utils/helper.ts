@@ -1,4 +1,5 @@
 import Buyer from "../model/buyer";
+import PersonalError from "../model/personalError";
 import { VehicleType } from "../model/vehicleType";
 
 export default class Helper {
@@ -25,7 +26,7 @@ export default class Helper {
             case "CAMINHAO":
                 return VehicleType.TRUCK;
             default:
-                throw new Error("Tipo de veículo inválido.");
+                throw new PersonalError("Tipo de veículo inválido.");
         }
     }
 }

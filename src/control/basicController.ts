@@ -20,7 +20,7 @@ export default class BasicController {
     }
 
     public generateTest(): void {
-        const car1 = new Car('Toyota', 'Corolla', 2020, 20000, 15000);
+        const car1 = new Car('Toyota', 'Corolla', 2020, 20000);
         const car2 = new Car('Honda', 'Civic', 2019, 18000, 20000);
 
         const motorcycle1 = new Motorcycle('Yamaha', 'MT-07', 2021, 7000, 5000);
