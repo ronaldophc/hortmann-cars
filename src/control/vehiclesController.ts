@@ -23,28 +23,27 @@ export default class VehiclesController {
     }
 
     public static listAllCars(): void {
-        console.log(this.datacenter.getCars());
+        this.datacenter.getCars();
     }
 
     public static listAllVehicles(): void {
-        console.log(this.datacenter.getAllVehicles());
+        this.datacenter.getAllVehicles();
     }
 
     public static getVehicleById(id: number): Car | Truck | Motorcycle {
         try {
             return this.datacenter.getVehiclebyId(id);
         } catch (error: any) {
-            console.log("Erro " + error.message);
             return error;
         }
     }
 
     public static listAllMotorcycles(): void {
-        console.log(this.datacenter.getMotorcycles());
+        this.datacenter.getMotorcycles();
     }
 
     public static listAllTrucks(): void {
-        console.log(this.datacenter.getTrucks());
+        this.datacenter.getTrucks();
     }
 
 }

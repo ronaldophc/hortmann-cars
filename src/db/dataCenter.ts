@@ -68,8 +68,6 @@ export default class DataCenter {
         throw new PersonalError("Vehicle not found");
     }
 
-    
-
     public getMotorcycles(): Motorcycle[] {
         return this.motorcyles;
     }
@@ -108,5 +106,9 @@ export default class DataCenter {
 
     public getSellerById(id: number): Seller {
         return this.sellers.find(seller => seller.getId() === id) as Seller;
+    }
+
+    public getSaleById(id: number): Sale {
+        return this.sales.find(sale => sale.getId() === id) as Sale;
     }
 }

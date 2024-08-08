@@ -18,4 +18,8 @@ export default class SaleController {
     public static listAllSales() {
         this.datacenter.getSales();
     }
+
+    public static getSaleById(id: number): Sale {
+        return this.datacenter.getSaleById(id);
+    }
 }

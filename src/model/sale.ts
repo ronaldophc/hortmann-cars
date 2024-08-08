@@ -1,4 +1,5 @@
 import Buyer from "../model/buyer";
+import Helper from "../utils/helper";
 import Seller from "./seller";
 import Vehicle from "./vehicle";
 
@@ -9,6 +10,7 @@ export default class Sale {
     private comission: number;
     private vehicle: Vehicle;
     private buyer: Buyer;
+    public id: number = Helper.generateId();
 
     constructor(saleDate: Date, seller: Seller, vehicle: Vehicle, buyer: Buyer) {
         this.saleDate = saleDate;
@@ -21,8 +23,6 @@ export default class Sale {
         this.buyer.setBalance(this.buyer.getBalance() - this.saleValue);
         this.calculateComission();
     }
-
-    
 
     private calculateComission(): void {
         this.comission = this.saleValue * 0.02;
@@ -47,5 +47,9 @@ export default class Sale {
 
     public getComission(): number {
         return this.comission;
+    }
+
+    public getId(): number {
+        return this.id;
     }
 }

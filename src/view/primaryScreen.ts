@@ -30,7 +30,8 @@ export default class PrimaryScreen {
         LIST_MOTORCYCLES: "3",
         LIST_SELLERS: "4",
         LIST_BUYERS: "5",
-        BACK: "6",
+        LIST_SALES: "6",
+        BACK: "7",
     };
 
     public getFirstScreen(): void {
@@ -49,7 +50,7 @@ export default class PrimaryScreen {
 
     private promptListMenu(): string {
         return this.prompt(
-            "Escolha:\n1- Listar carros\n2- Listar caminhões\n3- Listar motos\n4- Listar vendedores\n5- Listar compradores\n6- Voltar\n"
+            "Escolha:\n1- Listar carros\n2- Listar caminhões\n3- Listar motos\n4- Listar vendedores\n5- Listar compradores\n6- Listar vendas\n7- Voltar\n"
         );
     }
 
@@ -89,19 +90,22 @@ export default class PrimaryScreen {
     private handleListMenuChoice(choice: string): boolean {
         switch (choice) {
             case PrimaryScreen.LIST_MENU_OPTIONS.LIST_CARS:
-                VehiclesController.listAllCars();
+                console.log(VehiclesController.listAllCars());
                 break;
             case PrimaryScreen.LIST_MENU_OPTIONS.LIST_TRUCKS:
-                VehiclesController.listAllTrucks();
+                console.log(VehiclesController.listAllTrucks());
                 break;
             case PrimaryScreen.LIST_MENU_OPTIONS.LIST_MOTORCYCLES:
-                VehiclesController.listAllMotorcycles();
+                console.log(VehiclesController.listAllMotorcycles());
                 break;
             case PrimaryScreen.LIST_MENU_OPTIONS.LIST_SELLERS:
-                SellerController.listAllSellers();
+                console.log(SellerController.listAllSellers());
                 break;
             case PrimaryScreen.LIST_MENU_OPTIONS.LIST_BUYERS:
-                BuyerController.listAllBuyers();
+                console.log(BuyerController.listAllBuyers());
+                break;
+            case PrimaryScreen.LIST_MENU_OPTIONS.LIST_SALES:
+                console.log(SaleController.listAllSales());
                 break;
             case PrimaryScreen.LIST_MENU_OPTIONS.BACK:
                 return false;
@@ -142,7 +146,7 @@ export default class PrimaryScreen {
         if (newVehicle) {
             VehiclesController.registerNewVehicle(newVehicle);
             console.log(newVehicle);
-            VehiclesController.listAllVehicles();
+            console.log(VehiclesController.listAllVehicles());
         }
     }
 
@@ -150,7 +154,7 @@ export default class PrimaryScreen {
         const name = this.prompt("Digite o nome do vendedor:\n");
         const seller = new Seller(name);
         SellerController.registerNewSeller(seller);
-        SellerController.listAllSellers();
+        console.log(SellerController.listAllSellers());
     }
 
     private registerBuyer(): void {
@@ -160,7 +164,7 @@ export default class PrimaryScreen {
         );
         const buyer = BuyerController.createNewBuyer(name, money);
         BuyerController.registerNewBuyer(buyer);
-        BuyerController.listAllBuyers();
+        console.log(BuyerController.listAllBuyers());
     }
 
     private registerSale(): void {

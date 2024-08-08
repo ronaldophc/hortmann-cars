@@ -13,10 +13,10 @@ export default class BuyerController {
     }
 
     public static listAllBuyers() {
-        console.log(this.datacenter.getBuyers());
+        return this.datacenter.getBuyers();
     }
 
     public static getBuyerById(id: number): Buyer {
-        return this.datacenter.getBuyers().find(buyer => buyer.getId() === id) as Buyer;
+        return this.datacenter.getBuyerById(id);
     }
 }
