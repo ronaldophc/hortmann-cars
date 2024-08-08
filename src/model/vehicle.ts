@@ -9,7 +9,7 @@ export default abstract class Vehicle implements Entity {
     public model: string;
     public year: number;
     public value: number;
-    private type: VehicleType;
+    public type: VehicleType;
     private mileage;
 
     constructor(brand: string, model: string, year: number, value: number, type: VehicleType, mileage?: number) {
