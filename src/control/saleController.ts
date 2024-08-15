@@ -15,8 +15,8 @@ export default class SaleController {
         this.datacenter.addNewSale(sale);
     }
 
-    public static listAllSales() {
-        this.datacenter.getSales();
+    public static listAllSales(): Sale[] {
+        return this.datacenter.getSales();
     }
 
     public static getSaleById(id: number): Sale {

@@ -2,6 +2,7 @@ import DataCenter from "../db/dataCenter";
 import Car from "../model/car";
 import Motorcycle from "../model/motorcycle";
 import Truck from "../model/truck";
+import Vehicle from "../model/vehicle";
 
 export default class VehiclesController {
     private static datacenter: DataCenter = DataCenter.getInstance();
@@ -18,16 +19,16 @@ export default class VehiclesController {
         return new Motorcycle(brand, model, year, value, mileage);
     }
 
-    public static registerNewVehicle(vehicle: Car | Truck | Motorcycle): void {
+    public static registerNewVehicle<T extends Vehicle>(vehicle: T): void {
         this.datacenter.addNewVehicle(vehicle);
     }
 
-    public static listAllCars(): void {
-        this.datacenter.getCars();
+    public static listAllCars(): Car[] {
+        return this.datacenter.getCars();
     }
 
-    public static listAllVehicles(): void {
-        this.datacenter.getAllVehicles();
+    public static listAllVehicles(): Car[] | Truck[] | Motorcycle[] {
+        return this.datacenter.getAllVehicles();
     }
 
     public static getVehicleById(id: number): Car | Truck | Motorcycle {
@@ -38,12 +39,12 @@ export default class VehiclesController {
         }
     }
 
-    public static listAllMotorcycles(): void {
-        this.datacenter.getMotorcycles();
+    public static listAllMotorcycles(): Motorcycle[] {
+        return this.datacenter.getMotorcycles();
     }
 
-    public static listAllTrucks(): void {
-        this.datacenter.getTrucks();
+    public static listAllTrucks(): Truck[] {
+        return this.datacenter.getTrucks();
     }
 
 }

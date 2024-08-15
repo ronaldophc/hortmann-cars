@@ -44,7 +44,7 @@ export default class PrimaryScreen {
 
     private promptMenu(): string {
         return this.prompt(
-            "Escolha:\n1- Cadastrar carro\n2- Cadastrar vendedor\n3- Cadastrar comprador\n4- Cadastrar venda\n5- Listas\n6- Sair\n"
+            "Escolha:\n1- Cadastrar Automovel\n2- Cadastrar vendedor\n3- Cadastrar comprador\n4- Cadastrar venda\n5- Listas\n6- Sair\n"
         );
     }
 
@@ -116,16 +116,23 @@ export default class PrimaryScreen {
     }
 
     private registerCar(): void {
+        console.clear();
         const brand = this.prompt("Digite a marca do carro:\n");
+        console.clear();
         const model = this.prompt("Digite o modelo do carro:\n");
+        console.clear();
         const value = Number(this.prompt("Digite o valor do carro:\n"));
+        console.clear();
         const year = Number(this.prompt("Digite o ano do carro:\n"));
+        console.clear();
         const type = this.prompt(
             "Digite o tipo do carro:(CARRO, MOTO OU CAMINHAO)\n"
         );
+        console.clear();
         const mileage = Number(
             this.prompt("Digite a quilometragem do carro:(Não obrigatório)\n")
         );
+        console.clear();
         let vtype;
         try {
             vtype = Helper.getVehicleType(type);
@@ -151,13 +158,15 @@ export default class PrimaryScreen {
     }
 
     private registerSeller(): void {
+        console.clear();
         const name = this.prompt("Digite o nome do vendedor:\n");
-        const seller = new Seller(name);
+        const seller = SellerController.createNewSeller(name);
         SellerController.registerNewSeller(seller);
         console.log(SellerController.listAllSellers());
     }
 
     private registerBuyer(): void {
+        console.clear();
         const name = this.prompt("Digite o nome do comprador:\n");
         const money = Number(
             this.prompt("Digite o dinheiro que o Comprador tem:\n")
@@ -168,22 +177,27 @@ export default class PrimaryScreen {
     }
 
     private registerSale(): void {
-        console.log(VehiclesController.listAllCars());
+        console.clear();
+        console.log(VehiclesController.listAllVehicles());
         const carId = Number(this.prompt("Digite o id do carro:\n"));
         const car = VehiclesController.getVehicleById(carId);
         console.log(car);
+        console.clear();
 
         console.log(SellerController.listAllSellers());
         const sellerId = Number(this.prompt("Digite o id do vendedor:\n"));
         const seller = SellerController.getSellerById(sellerId);
         console.log(seller);
+        console.clear();
 
         console.log(BuyerController.listAllBuyers());
         const buyerId = Number(this.prompt("Digite o id do comprador:\n"));
         const buyer = BuyerController.getBuyerById(buyerId);
         console.log(buyer);
+        console.clear();
 
         const sale = SaleController.createNewSale(seller, buyer, car);
+        SaleController.registerNewSale(sale);
         console.log(sale.infoPurchase());
     }
 }

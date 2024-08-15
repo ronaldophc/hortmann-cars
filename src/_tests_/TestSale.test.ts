@@ -4,13 +4,6 @@ import Sale from "../model/sale";
 import Seller from "../model/seller";
 import Vehicle from "../model/vehicle";
 
-class TestSale extends Sale {
-  constructor(date: Date, seller: Seller, vehicle: Vehicle, buyer: Buyer) {
-    super(date, seller, vehicle, buyer);
-  }
-
-}
-
 describe('Sale', () => {
   let sale: Sale;
   let buyer: Buyer;

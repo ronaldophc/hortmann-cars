@@ -12,7 +12,7 @@ export default class BuyerController {
         this.datacenter.addNewBuyer(buyer);
     }
 
-    public static listAllBuyers() {
+    public static listAllBuyers(): Buyer[] {
         return this.datacenter.getBuyers();
     }
 

@@ -4,6 +4,10 @@ import Seller from "../model/seller";
 export default class SellerController {
     private static datacenter: DataCenter = DataCenter.getInstance();
 
+    public static createNewSeller(name: string): Seller {
+        return new Seller(name);
+    }
+
     public static registerNewSeller(Seller: Seller) {
         this.datacenter.addNewSeller(Seller);
     }

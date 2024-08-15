@@ -10,7 +10,7 @@ import Vehicle from "../model/vehicle";
 export default class DataCenter {
     private static instance: DataCenter;
     private cars: Car[];
-    private motorcyles: Motorcycle[];
+    private motorcycles: Motorcycle[];
     private trucks: Truck[];
     private buyers: Buyer[];
     private sellers: Seller[];
@@ -18,7 +18,7 @@ export default class DataCenter {
 
     private constructor() {
         this.cars = [];
-        this.motorcyles = [];
+        this.motorcycles = [];
         this.buyers = [];
         this.sellers = [];
         this.sales = [];
@@ -32,23 +32,23 @@ export default class DataCenter {
         return DataCenter.instance;
     }
     
-    public addNewVehicle(vehicle: Car | Motorcycle | Truck): void {
+    public addNewVehicle<T extends Vehicle>(vehicle: T): void {
         if (vehicle instanceof Car) {
-            this.cars.push(vehicle);
+            this.cars.push(vehicle as Car);
             return;
         }
         if(vehicle instanceof Motorcycle) {
-            this.motorcyles.push(vehicle);
+            this.motorcycles.push(vehicle as Motorcycle);
             return;
         }
         if(vehicle instanceof Truck) {
-            this.trucks.push(vehicle);
+            this.trucks.push(vehicle as Truck);
             return;
         }
     }
 
     public getAllVehicles(): Vehicle[] {
-        return [...this.cars, ...this.motorcyles, ...this.trucks];
+        return [...this.cars, ...this.motorcycles, ...this.trucks];
     }
 
     public getCars(): Car[] {
@@ -59,8 +59,8 @@ export default class DataCenter {
         if(this.cars.find(cars => cars.getId() === id)) {
             return this.cars.find(cars => cars.getId() === id) as Car;
         }
-        if(this.motorcyles.find(motorcycles => motorcycles.getId() === id)) {
-            return this.motorcyles.find(motorcycles => motorcycles.getId() === id) as Motorcycle;
+        if(this.motorcycles.find(motorcycles => motorcycles.getId() === id)) {
+            return this.motorcycles.find(motorcycles => motorcycles.getId() === id) as Motorcycle;
         }
         if(this.trucks.find(trucks => trucks.getId() === id)) {
             return this.trucks.find(trucks => trucks.getId() === id) as Truck;
@@ -69,7 +69,7 @@ export default class DataCenter {
     }
 
     public getMotorcycles(): Motorcycle[] {
-        return this.motorcyles;
+        return this.motorcycles;
     }
 
     public getTrucks(): Truck[] {

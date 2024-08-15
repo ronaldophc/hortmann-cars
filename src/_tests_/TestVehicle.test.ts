@@ -19,7 +19,7 @@ class TestVehicle extends Vehicle {
 }
 
 describe("TestVehicle", () => {
-  let vehicle: TestVehicle;
+  let vehicle: Vehicle;
 
   beforeEach(() => {
     vehicle = new TestVehicle(
@@ -42,6 +42,8 @@ describe("TestVehicle", () => {
     expect(vehicle.getYear()).toBe(2020);
     expect(vehicle.getValue()).toBe(10000);
     expect(vehicle.getType()).toBe(VehicleType.CAR);
+
+    expect(vehicle.getYear()).toBe(2021);
   });
 
   test("setters precisa atualizar os valores corretamente", () => {

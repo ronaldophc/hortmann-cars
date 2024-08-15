@@ -29,8 +29,8 @@ export default class Sale {
         this.seller.setBalance(this.seller.getBalance() + this.comission);
     }
 
-    public infoPurchase() {
-        console.log(`Comprador: ${this.buyer.getName()}, comprou o carro: ${this.vehicle.getModel()}, ano: ${this.vehicle.getYear()}, pelo valor: R$${this.vehicle.getValue()}. Vendedor: ${this.seller.getName()} ganhou a comissao de R$${this.comission}`)
+    public infoPurchase(): string {
+        return `Comprador: ${this.buyer.getName()}, comprou o carro: ${this.vehicle.getModel()}, ano: ${this.vehicle.getYear()}, pelo valor: R$${this.vehicle.getValue()}. Vendedor: ${this.seller.getName()} ganhou a comissao de R$${this.comission}`;
     }
 
     public getSaleDate(): Date {

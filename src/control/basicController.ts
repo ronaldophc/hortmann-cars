@@ -36,8 +36,8 @@ export default class BasicController {
         VehiclesController.registerNewVehicle(truck1);
         VehiclesController.registerNewVehicle(truck2);
 
-        const buyer1 = new Buyer('John Doe', 25000);
-        const buyer2 = new Buyer('Jane Smith', 30000);
+        const buyer1 = new Buyer('John Doe', 210000);
+        const buyer2 = new Buyer('Jane Smith', 100000);
 
         const seller1 = new Seller('Mary Johnson');
         const seller2 = new Seller('Paul Brown');
