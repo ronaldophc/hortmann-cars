@@ -24,6 +24,6 @@ describe('Seller', () => {
   test('describe should return a correct description string', () => {
     const description = seller.describe();
     expect(description).toContain('John Doe');
-    expect(description).toContain('Comissão: 0'); // Assuming the Person.describe() includes the name.
+    expect(description).toContain('Comissão: 0');
   });
 });

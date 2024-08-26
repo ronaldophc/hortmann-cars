@@ -42,8 +42,6 @@ describe("TestVehicle", () => {
     expect(vehicle.getYear()).toBe(2020);
     expect(vehicle.getValue()).toBe(10000);
     expect(vehicle.getType()).toBe(VehicleType.CAR);
-
-    expect(vehicle.getYear()).toBe(2021);
   });
 
   test("setters precisa atualizar os valores corretamente", () => {
@@ -56,6 +54,8 @@ describe("TestVehicle", () => {
     expect(vehicle.getModel()).toBe("NewModel");
     expect(vehicle.getYear()).toBe(2021);
     expect(vehicle.getValue()).toBe(15000);
+
+    expect(vehicle.getYear()).toBe(2020);
   });
 
   test("getId precisa retornar um valor do tipo number", () => {
