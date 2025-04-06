@@ -1,0 +1,12 @@
+tasks:
+  up:
+    usage: start the docker containers
+    run: docker compose up -d
+
+  migrate:
+    usage: run the migrations
+    run: docker compose exec laravel php artisan migrate
+
+  php:
+    usage: run the php container
+    run: docker compose exec laravel bash
