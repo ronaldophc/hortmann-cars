@@ -9,4 +9,7 @@ tasks:
 
   php:
     usage: run the php container
-    run: docker compose exec laravel bash
+    args:
+      command:
+        usage: the command to run
+    run: docker compose exec laravel ${command}
