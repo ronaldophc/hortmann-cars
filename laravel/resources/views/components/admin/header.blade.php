@@ -9,14 +9,23 @@
             class="flex flex-wrap items-center justify-center text-base md:ml-4 md:mr-auto md:border-l md:border-gray-700 md:py-1 md:pl-4">
             <a class="mr-5 cursor-pointer leading-8 hover:text-white" href="{{ route('admin.dashboard') }}">Home</a>
             <a class="mr-5 cursor-pointer leading-8 hover:text-white">Configurações</a>
+            <a class="mr-5 cursor-pointer leading-8 hover:text-white"
+                href="{{ route('admin.vehicles.index') }}">Veículos</a>
         </nav>
 
-        <form action="{{ route('admin.logout') }}" method="POST" class="flex items-center">
-            @csrf
-            <button
-                class="mt-4 inline-flex cursor-pointer items-center rounded border-0 bg-red-500 px-3 text-base text-black hover:bg-red-600 focus:outline-none md:mt-0">
-                <span class="leading-8">Sair</span>
-            </button>
-        </form>
+        <div class="flex flex-wrap gap-2 justify-center md:justify-end">
+            <a href="{{ route('admin.vehicles.create') }}"
+                class="inline-flex cursor-pointer items-center rounded border-0 bg-green-500 px-3 text-base text-black hover:bg-green-600 focus:outline-none md:mt-0">
+                Criar Veículo
+            </a>
+            <form action="{{ route('admin.logout') }}" method="POST" class="flex items-center">
+                @csrf
+                <button
+                    class="inline-flex cursor-pointer items-center rounded border-0 bg-red-500 px-3 text-base text-black hover:bg-red-600 focus:outline-none md:mt-0">
+                    <span class="leading-8">Sair</span>
+                </button>
+            </form>
+        </div>
+
     </div>
 </header>

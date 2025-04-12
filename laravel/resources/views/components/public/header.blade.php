@@ -1,14 +1,21 @@
-<header class="text-gray-400 bg-gray-900 body-font">
-  <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-    <a class="flex title-font font-medium items-center text-white mb-4 md:mb-0" href="{{ route('public.home') }}">
-        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-10 h-10">
-      <span class="ml-3 text-xl">{{ env('APP_NAME') }}</span>
-    </a>
-    <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-700 flex flex-wrap items-center text-base justify-center">
-      <a class="cursor-pointer mr-5 hover:text-white">Home</a>
-      <a class="cursor-pointer mr-5 hover:text-white">Estoque</a>
-      <a class="cursor-pointer mr-5 hover:text-white">Sobre</a>
-      <a class="cursor-pointer mr-5 hover:text-white">Contato</a>
-    </nav>
-  </div>
+<header class="body-font bg-gray-900 text-gray-400">
+    <div class="container mx-auto flex flex-col flex-wrap items-center p-5 md:flex-row">
+        <a class="title-font mb-4 flex items-center font-medium text-white md:mb-0" href="{{ route('public.home') }}">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-10 w-10">
+            <span class="ml-3 text-xl">{{ env('APP_NAME') }}</span>
+        </a>
+        <nav
+            class="flex flex-wrap items-center justify-center text-base md:ml-4 md:mr-auto md:border-l md:border-gray-700 md:py-1 md:pl-4">
+            <a class="mr-5 cursor-pointer hover:text-white">Home</a>
+            <a class="mr-5 cursor-pointer hover:text-white">Estoque</a>
+            <a class="mr-5 cursor-pointer hover:text-white">Sobre</a>
+            <a class="mr-5 cursor-pointer hover:text-white">Contato</a>
+        </nav>
+        <a href="{{ route('login') }}">
+            <button
+                class="mt-4 inline-flex cursor-pointer items-center rounded border-0 bg-gray-800 px-3 py-1 text-base hover:bg-gray-700 focus:outline-none md:mt-0">
+                Login Admin
+            </button>
+        </a>
+    </div>
 </header>

@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+{{-- // TODO: lista de ulitmos criados, botao para criar, botao para pesquisar --}}
     <section class="relative py-4">
         <div class="mx-auto w-full max-w-7xl px-4 md:px-8">
             <div class="flex w-full flex-col justify-between max-lg:gap-4 lg:flex-row lg:items-center">
