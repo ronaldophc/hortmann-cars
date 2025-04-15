@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\VehicleStoreRequest;
+use App\Http\Requests\VehicleUpdateRequest;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -60,5 +61,47 @@ class VehicleController extends Controller
     public function create()
     {
         return view('admin.vehicles.create');
+    }
+
+    public function edit(Vehicle $vehicle)
+    {
+        return view('admin.vehicles.edit', [
+            'vehicle' => $vehicle,
+        ]);
+    }
+
+    public function update(VehicleUpdateRequest $request, Vehicle $vehicle)
+    {
+        DB::beginTransaction();
+
+        try {
+            $vehicle->update($request->all());
+            DB::commit();
+            return redirect(route('admin.vehicles.edit', $vehicle->id))
+                ->with('success', 'Veículo atualizado com sucesso!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Erro ao atualizar veículo: ' . $e->getMessage());
+            return back()
+                ->with('error', $e->getMessage())
+                ->withInput();
+        }
+    }
+
+    public function destroy(Vehicle $vehicle)
+    {
+        DB::beginTransaction();
+
+        try {
+            $vehicle->delete();
+            DB::commit();
+            return redirect(route('admin.vehicles.index'))
+                ->with('success', 'Veículo excluído com sucesso!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Erro ao excluir veículo: ' . $e->getMessage());
+            return back()
+                ->with('error', $e->getMessage());
+        }
     }
 }

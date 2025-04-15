@@ -9,7 +9,7 @@
                         <option value="car" {{ request('type') == 'car' ? 'selected' : '' }}>Carro</option>
                         <option value="motorcycle" {{ request('type') == 'motorcycle' ? 'selected' : '' }}>Moto</option>
                     </select>
-                    
+
                     <div>
                         <select name="sort" class="rounded border-2 border-gray-500 px-4 py-2">
                             <option value="">Ordenar por</option>
@@ -34,9 +34,11 @@
         </div>
     </section>
     <section class="body-font text-gray-600">
-        <span>
-            <p class="mb-2 text-center text-md text-gray-600">Resultado da busca ({{ count($vehicles) }})</p>
-        </span>
+        <div class="mb-2 text-center">
+            <span class="text-md text-gray-600">
+                Resultado da busca ({{ count($vehicles) }})
+            </span>
+        </div>
         <div class="container mx-auto px-5 pb-24">
             <div class="-m-4 flex flex-wrap">
                 @foreach ($vehicles as $vehicle)

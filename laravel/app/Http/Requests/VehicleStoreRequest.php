@@ -26,6 +26,7 @@ class VehicleStoreRequest extends FormRequest
             'price' => 'required|numeric|min:0',
             'license_plate' => 'nullable|string|max:255|unique:vehicles,license_plate',
             'description' => 'nullable|string|max:1000',
+            'is_active' => 'required|boolean',
         ];
     }
 
@@ -39,6 +40,25 @@ class VehicleStoreRequest extends FormRequest
             'price.numeric' => 'O preço deve ser um valor numérico.',
             'license_plate.unique' => 'A placa do veículo já está cadastrada.',
             'year.regex' => 'O ano deve estar no formato YYYY.',
+            'doors.integer' => 'O número de portas deve ser um número inteiro.',
+            'doors.min' => 'O número de portas deve ser pelo menos 0.',
+            'doors.max' => 'O número de portas não pode ser maior que 5.',
+            'current_km.string' => 'A quilometragem atual deve ser uma string.',
+            'current_km.max' => 'A quilometragem atual não pode ter mais de 255 caracteres.',
+            'description.string' => 'A descrição deve ser uma string.',
+            'description.max' => 'A descrição não pode ter mais de 1000 caracteres.',
+            'is_active.required' => 'O status de atividade do veículo é obrigatório.',
+            'is_active.boolean' => 'O status de atividade do veículo deve ser verdadeiro ou falso.',
+            'fuel_type.string' => 'O tipo de combustível deve ser uma string.',
+            'steering_type.string' => 'O tipo de direção deve ser uma string.',
+            'transmission.string' => 'A transmissão deve ser uma string.',
+            'transmission.in' => 'A transmissão deve ser automática ou manual.',
+            'steering_type.in' => 'O tipo de direção deve ser mecânica, hidráulica ou elétrica.',
+            'fuel_type.in' => 'O tipo de combustível deve ser gasolina, álcool, flex ou diesel.',
+            'model.string' => 'O modelo deve ser uma string.',
+            'manufacturer.string' => 'O fabricante deve ser uma string.',
+            'license_plate.string' => 'A placa deve ser uma string.',
+            'license_plate.max' => 'A placa não pode ter mais de 255 caracteres.',
         ];
     }
 }

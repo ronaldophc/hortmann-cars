@@ -21,10 +21,11 @@ return new class extends Migration
             $table->string('transmission')->nullable(); // Automática, Manual
             $table->integer('doors')->nullable(); // Número de portas (aplicável apenas para automóveis)
             $table->string('year')->nullable(); // Ano do modelo
-            $table->string('current_km')->nullable(); // Quilometragem atual
+            $table->string('mileage')->nullable(); // Quilometragem atual
             $table->decimal('price', 10, 2); // Preço
             $table->string('license_plate')->nullable()->unique(); // Não exibido publicamente - Placa do veículo
             $table->text('description')->nullable();
+            $table->boolean('is_active')->default(true); // Se o veículo está ativo ou não
             $table->timestamps();
         });
     }
