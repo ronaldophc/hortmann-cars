@@ -51,10 +51,6 @@
                         </div>
 
                     </form>
-
-                    <p class="mt-6 text-center text-sm text-gray-400">Não tem uma conta? <a href="#"
-                            class="text-blue-500 hover:underline focus:underline focus:outline-none">Registre aqui!</a>.
-                    </p>
                 </div>
             </div>
         </div>

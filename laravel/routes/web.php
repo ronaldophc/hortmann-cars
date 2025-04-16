@@ -6,9 +6,11 @@ use App\Http\Controllers\VehicleController;
 
 Route::get('/', function () {
     return view('welcome');
-})->name('public.home');
+})->name('home');
+
 
 Route::get('/login', [AuthController::class, 'login'])
+    ->middleware('guest')
     ->name('login');
 
 Route::post('/login', [AuthController::class, 'authenticate'])

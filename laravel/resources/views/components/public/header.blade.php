@@ -1,6 +1,6 @@
 <header class="body-font bg-gray-900 text-gray-400">
     <div class="container mx-auto flex flex-col flex-wrap items-center p-5 md:flex-row">
-        <a class="title-font mb-4 flex items-center font-medium text-white md:mb-0" href="{{ route('public.home') }}">
+        <a class="title-font mb-4 flex items-center font-medium text-white md:mb-0" href="{{ route('home') }}">
             <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-10 w-10">
             <span class="ml-3 text-xl">{{ env('APP_NAME') }}</span>
         </a>

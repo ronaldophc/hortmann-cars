@@ -30,7 +30,7 @@ class AuthController extends Controller
     public function logout(Request $request): RedirectResponse
     {
         if (!Auth::check()) {
-            return redirect()->route('public.home');
+            return redirect()->route('home');
         }
         Auth::logout();
 

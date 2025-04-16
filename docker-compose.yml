@@ -4,7 +4,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: laravel
     restart: unless-stopped
     working_dir: /var/www/
     volumes:
@@ -28,7 +27,6 @@ services:
   laravel-nginx:
     image: nginx:alpine
     restart: unless-stopped
-    container_name: laravel-nginx
     ports:
       # laravel port
       - "8080:80"
@@ -41,7 +39,6 @@ services:
   # db mysql
   database:
     image: mysql:8.0
-    container_name: database
     platform: linux/x86_64
     restart: always
     volumes:
@@ -57,7 +54,6 @@ services:
   # PHPMyAdmin
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
     platform: linux/x86_64
     restart: unless-stopped
     ports:

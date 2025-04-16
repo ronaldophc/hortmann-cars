@@ -8,7 +8,7 @@
             <input hidden name="is_active" value="1"/>
             <div class="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-2">
                 <div>
-                    <label class="text-gray-700 dark:text-gray-200" for="type">Tipo</label>
+                    <label class="text-gray-700 dark:text-gray-200" for="type">Tipo<span class="text-red-700">*</span></label>
                     <select id="type" name="type"
                         class="cursor-pointer mt-1 block w-full rounded-md border border-gray-200 bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:focus:border-blue-300">
                         <option value="car" {{ old('type') == 'car' ? 'selected' : '' }}>Carro</option>
@@ -20,7 +20,7 @@
                 </div>
 
                 <div>
-                    <label class="text-gray-700 dark:text-gray-200" for="model">Modelo</label>
+                    <label class="text-gray-700 dark:text-gray-200" for="model">Modelo<span class="text-red-700">*</span></label>
                     <input id="model" name="model" type="text" value="{{ old('model') }}"
                         class="mt-1 block w-full rounded-md border border-gray-200 bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:focus:border-blue-300">
                     @error('model')
@@ -29,7 +29,7 @@
                 </div>
 
                 <div>
-                    <label class="text-gray-700 dark:text-gray-200" for="manufacturer">Fabricante</label>
+                    <label class="text-gray-700 dark:text-gray-200" for="manufacturer">Fabricante<span class="text-red-700">*</span></label>
                     <input id="manufacturer" name="manufacturer" type="text" value="{{ old('manufacturer') }}"
                         class="mt-1 block w-full rounded-md border border-gray-200 bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:focus:border-blue-300">
                     @error('manufacturer')
@@ -104,7 +104,7 @@
                 </div>
 
                 <div>
-                    <label class="text-gray-700 dark:text-gray-200" for="price">Preço</label>
+                    <label class="text-gray-700 dark:text-gray-200" for="price">Preço<span class="text-red-700">*</span></label>
                     <input id="price" name="price" type="number" step="0.01" value="{{ old('price') }}"
                         class="mt-1 block w-full rounded-md border border-gray-200 bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:focus:border-blue-300">
                     @error('price')
