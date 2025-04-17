@@ -8,8 +8,7 @@
             class="flex flex-wrap items-center justify-center text-base md:ml-4 md:mr-auto md:border-l md:border-gray-700 md:py-1 md:pl-4">
             <a class="mr-5 cursor-pointer hover:text-white">Home</a>
             <a class="mr-5 cursor-pointer hover:text-white">Estoque</a>
-            <a class="mr-5 cursor-pointer hover:text-white">Sobre</a>
-            <a class="mr-5 cursor-pointer hover:text-white">Contato</a>
+            <a class="mr-5 cursor-pointer hover:text-white" href="{{ route("contact") }}">Contato</a>
         </nav>
         <a href="{{ route('login') }}">
             <button

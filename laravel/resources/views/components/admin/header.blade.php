@@ -8,7 +8,7 @@
         <nav
             class="flex flex-wrap items-center justify-center text-base md:ml-4 md:mr-auto md:border-l md:border-gray-700 md:py-1 md:pl-4">
             <a class="mr-5 cursor-pointer leading-8 hover:text-white" href="{{ route('admin.dashboard') }}">Home</a>
-            <a class="mr-5 cursor-pointer leading-8 hover:text-white" href="{{ route('home') }}">Ver Site</a>
+            <a class="mr-5 cursor-pointer leading-8 hover:text-white" target="_blank" href="{{ route('home') }}">Ver Site</a>
         </nav>
 
         <div class="flex flex-wrap justify-center gap-2 md:justify-end">

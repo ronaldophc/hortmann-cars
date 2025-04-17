@@ -2,12 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PublicController;
 use App\Http\Controllers\VehicleController;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/', [PublicController::class, 'index'])
+    ->name('home');
 
+Route::get('/contact', [PublicController::class, 'contact'])
+    ->name('contact');
 
 Route::get('/login', [AuthController::class, 'login'])
     ->middleware('guest')

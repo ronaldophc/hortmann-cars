@@ -37,7 +37,7 @@ class Vehicle extends Model
         }
 
         if ($attribute == 'year') {
-            return date('Y', strtotime($this->attributes[$attribute]));
+            return $this->attributes[$attribute];
         }
 
         if ($attribute == 'doors') {
