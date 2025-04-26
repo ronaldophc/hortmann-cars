@@ -13,7 +13,6 @@ services:
 
   vite:
     image: node:18
-    container_name: vite
     working_dir: /var/www
     volumes:
       - ./laravel:/var/www

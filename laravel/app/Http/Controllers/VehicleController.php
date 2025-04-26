@@ -45,7 +45,7 @@ class VehicleController extends Controller
         DB::beginTransaction();
 
         try {
-            $vehicle = Vehicle::create($request->all());
+            $vehicle = Vehicle::create($request->validated());
             DB::commit();
             return redirect(route('admin.vehicles.show', $vehicle->id))
                 ->with('success', 'Veículo cadastrado com sucesso!');
@@ -75,7 +75,7 @@ class VehicleController extends Controller
         DB::beginTransaction();
 
         try {
-            $vehicle->update($request->all());
+            $vehicle->update($request->validated());
             DB::commit();
             return redirect(route('admin.vehicles.edit', $vehicle->id))
                 ->with('success', 'Veículo atualizado com sucesso!');
