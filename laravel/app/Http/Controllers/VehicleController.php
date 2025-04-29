@@ -8,21 +8,24 @@ use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class VehicleController extends Controller
 {
     public function index(Request $request)
     {
         $query = Vehicle::query();
+        $user = Auth::user();
+        $query->where('user_id', $user->id);
 
         if ($request->filled('type')) {
             $query->where('type', $request->type);
         }
-    
+
         if ($request->filled('sort')) {
             if ($request->sort == 'price_asc') {
                 $query->orderBy('price', 'asc');
-            } 
+            }
             if ($request->sort == 'price_desc') {
                 $query->orderBy('price', 'desc');
             }
@@ -43,9 +46,13 @@ class VehicleController extends Controller
     public function store(VehicleStoreRequest $request)
     {
         DB::beginTransaction();
+        $user = Auth::user();
 
         try {
-            $vehicle = Vehicle::create($request->validated());
+            $data = $request->validated();
+            $data['user_id'] = $user->id;
+
+            $vehicle = Vehicle::create($data);
             DB::commit();
             return redirect(route('admin.vehicles.show', $vehicle->id))
                 ->with('success', 'Veículo cadastrado com sucesso!');

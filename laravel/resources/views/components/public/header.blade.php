@@ -10,7 +10,7 @@
             <a class="mr-5 cursor-pointer hover:text-white">Estoque</a>
             <a class="mr-5 cursor-pointer hover:text-white" href="{{ route("contact") }}">Contato</a>
         </nav>
-        <a href="{{ route('login') }}">
+        <a href="{{ route('admin.vehicles.index') }}">
             <button
                 class="mt-4 inline-flex cursor-pointer items-center rounded border-0 bg-gray-800 px-3 py-1 text-base hover:bg-gray-700 focus:outline-none md:mt-0">
                 Login Admin

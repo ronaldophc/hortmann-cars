@@ -46,13 +46,15 @@
                         <a href="{{ route('admin.vehicles.show', $vehicle->id) }}">
                             <div class="relative block h-48 overflow-hidden rounded">
                                 <img alt="ecommerce" class="block h-full w-full object-cover object-center"
-                                    src="{{ strtolower($vehicle->model) == 'hb20' ? asset('images/hb20-large.webp') : asset('images/vehicle.png') }}">
+                                     src="{{ strtolower($vehicle->model) == 'hb20' ? asset('images/hb20-large.webp') : asset('images/vehicle.png') }}">
                             </div>
                             <div class="mt-4">
                                 <h3 class="title-font mb-1 text-sm tracking-widest text-gray-600">
-                                    {{ $vehicle->manufacturer }}</h3>
-                                <h2 class="title-font text-lg font-medium text-gray-900">{{ $vehicle->model }}</h2>
-                                <p class="mt-1">R${{ $vehicle->price }}</p>
+                                    {{ $vehicle->getAttributeFormated("manufacturer") }}</h3>
+                                <h2 class="title-font text-lg font-medium text-gray-900">{{ $vehicle->getAttributeFormated("model") }}</h2>
+                                <p class="text-sm text-gray-500">
+                                    {{ $vehicle->getAttributeFormated("year") }} - {{ $vehicle->getAttributeFormated("mileage") }} km</p>
+                                <p class="mt-1">{{ $vehicle->getAttributeFormated("price") }}</p>
                             </div>
                         </a>
                     </div>
