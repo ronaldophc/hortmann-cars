@@ -2,7 +2,7 @@
     <div class="container mx-auto flex flex-col flex-wrap items-center p-2 md:flex-row">
         <a class="title-font mb-4 flex items-center font-medium text-white md:mb-0" href="{{ route('admin.vehicles.index') }}">
             <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-10 w-10">
-            <span class="ml-3 text-xl">{{ env('APP_NAME') }}</span>
+            <span class="ml-3 text-xl">{{ config('app.name') }}</span>
         </a>
 
         <nav

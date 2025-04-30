@@ -24,7 +24,7 @@ class PublicController extends Controller
             }
         }
 
-        $vehicles = $query->paginate(5);
+        $vehicles = $query->paginate(10);
 
         return view('public.index', compact('vehicles'));
     }

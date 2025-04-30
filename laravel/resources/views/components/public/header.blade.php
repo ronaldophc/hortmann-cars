@@ -2,7 +2,7 @@
     <div class="container mx-auto flex flex-col flex-wrap items-center p-5 md:flex-row">
         <a class="title-font mb-4 flex items-center font-medium text-white md:mb-0" href="{{ route('home') }}">
             <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-10 w-10">
-            <span class="ml-3 text-xl">{{ env('APP_NAME') }}</span>
+            <span class="ml-3 text-xl">{{ config('app.name') }}</span>
         </a>
         <nav
             class="flex flex-wrap items-center justify-center text-base md:ml-4 md:mr-auto md:border-l md:border-gray-700 md:py-1 md:pl-4">

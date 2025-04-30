@@ -1,4 +1,4 @@
-<div class="w-full p-4 md:w-1/2 lg:w-1/4">
+<div class="w-full p-2 m-2 md:w-1/2 lg:w-1/4 border-1 rounded-lg border-gray-800 bg-gray-900">
     <a href="{{ route('admin.vehicles.show', $vehicle->id) }}">
         <div class="relative block h-48 overflow-hidden rounded">
             <img alt="ecommerce" class="block h-full w-full object-cover object-center"
