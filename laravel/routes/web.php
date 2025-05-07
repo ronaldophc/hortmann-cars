@@ -8,6 +8,10 @@ use App\Http\Controllers\VehicleController;
 Route::get('/', [PublicController::class, 'index'])
     ->name('home');
 
+Route::get('/teste', function () {
+    return view('welcome');
+});
+
 Route::get('/contact', [PublicController::class, 'contact'])
     ->name('contact');
 

@@ -1,4 +1,4 @@
-<div class="w-full p-2 m-2 md:w-1/2 lg:w-1/4 border-1 rounded-lg border-gray-800 bg-gray-900">
+{{-- <div class="w-full p-2 m-2 md:w-1/2 lg:w-1/4 border-1 rounded-lg border-gray-800 bg-gray-900">
     <a href="{{ route('admin.vehicles.show', $vehicle->id) }}">
         <div class="relative block h-48 overflow-hidden rounded">
             <img alt="ecommerce" class="block h-full w-full object-cover object-center"
@@ -23,4 +23,30 @@
             <p class="mt-1 text-gray-100">{{ $vehicle->getAttributeFormated("price") }}</p>
         </div>
     </a>
+</div> --}}
+
+
+<div class="card bg-base-100 w-96 shadow-sm">
+    <figure>
+        <img src="{{ strtolower($vehicle->model) == 'hb20' ? asset('images/hb20-large.webp') : asset('images/vehicle.png') }}"
+            alt="car" />
+    </figure>
+    <div class="card-body">
+        <h2 class="card-title">
+            {{ $vehicle->getAttributeFormated('manufacturer') }} {{ $vehicle->getAttributeFormated('model') }}
+        </h2>
+        <div>
+            <div class="badge badge-neutral"> {{ $vehicle->getAttributeFormated('year') }}</div>
+            @if (!empty($vehicle->mileage))
+                <div class="badge badge-neutral"> {{ $vehicle->getAttributeFormated('mileage') }} km</div>
+            @endif
+            @if (!empty($vehicle->transmission))
+                <div class="badge badge-neutral"> {{ $vehicle->getAttributeFormated('transmission') }}</div>
+            @endif
+        </div>
+        <div class="card-actions justify-between">
+            <button class="btn btn-outline">{{ $vehicle->getAttributeFormated('price') }}</button>
+            <button class="btn btn-ghost">Ver detalhes</button>
+        </div>
+    </div>
 </div>

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html data-theme="cupcake">
 
 @include('shared.head')
 
-<body class="bg-gray-900 font-sans antialiased min-h-screen flex flex-col">
+<body class="font-sans antialiased min-h-screen flex flex-col">
 
 @include('components.public.header')
 
