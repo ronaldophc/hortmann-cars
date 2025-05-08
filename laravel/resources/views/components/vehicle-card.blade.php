@@ -26,7 +26,7 @@
 </div> --}}
 
 
-<div class="card bg-base-100 w-96 shadow-sm">
+<div class="card bg-base-200 w-96 shadow-sm">
     <figure>
         <img src="{{ strtolower($vehicle->model) == 'hb20' ? asset('images/hb20-large.webp') : asset('images/vehicle.png') }}"
             alt="car" />

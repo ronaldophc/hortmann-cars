@@ -22,5 +22,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>{{ env('APP_NAME') }}</title>
 
+    @vite('resources/js/app.js')
     @vite('resources/css/app.css')
 </head>

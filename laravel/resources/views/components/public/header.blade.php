@@ -1,9 +1,11 @@
-<div class="navbar bg-base-100 shadow-sm">
+{{-- filepath: /home/ronaldo/web/utfpr/sistemas/back-framework/hortmann-cars/laravel/resources/views/components/public/header.blade.php --}}
+<div class="navbar bg-base-300 shadow-sm">
     <div class="navbar-start">
         <div class="dropdown">
             <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
-                <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-10 w-10">
-                {{ config('app.name') }}
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+                </svg>
             </div>
             <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                 <li><a href="{{ route('home') }}">Home</a></li>
@@ -11,19 +13,20 @@
                 <li><a href="{{ route('contact') }}">Contato</a></li>
             </ul>
         </div>
-        <a class="ms-4 text-xl flex items-center font-bold" href="{{ route('home') }}">
+        <a class="btn btn-ghost text-xl flex items-center" href="{{ route('home') }}">
             <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-10 w-10">
-            {{ config('app.name') }}
+            <span>{{ config('app.name') }}</span>
         </a>
     </div>
     <div class="navbar-center hidden lg:flex">
-        <ul class="menu menu-horizontal px-1 text-md">
+        <ul class="menu menu-horizontal px-1">
             <li><a href="{{ route('home') }}">Home</a></li>
             <li><a href="#">Estoque</a></li>
             <li><a href="{{ route('contact') }}">Contato</a></li>
         </ul>
     </div>
-    <div class="navbar-end">
+    <div class="navbar-end gap-2">
+        @include('components.theme-controller')
         <a href="{{ route('admin.vehicles.index') }}" class="btn">Login Admin</a>
     </div>
 </div>

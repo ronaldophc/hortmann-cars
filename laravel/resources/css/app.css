@@ -12,5 +12,5 @@
 }
 
 @plugin "daisyui" {
-    themes: cupcake --default;
+    themes: corporate --default, luxury --prefersdark;
 }
