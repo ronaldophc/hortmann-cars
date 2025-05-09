@@ -1,5 +1,5 @@
 {{-- filepath: /home/ronaldo/web/utfpr/sistemas/back-framework/hortmann-cars/laravel/resources/views/components/public/header.blade.php --}}
-<div class="navbar bg-base-300 shadow-sm">
+<div class="navbar">
     <div class="navbar-start">
         <div class="dropdown">
             <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
@@ -27,6 +27,5 @@
     </div>
     <div class="navbar-end gap-2">
         @include('components.theme-controller')
-        <a href="{{ route('admin.vehicles.index') }}" class="btn">Login Admin</a>
     </div>
 </div>
