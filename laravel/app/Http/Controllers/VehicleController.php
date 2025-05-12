@@ -17,7 +17,7 @@ class VehicleController extends Controller
         $query = Vehicle::query();
         $user = Auth::user();
         $query->where('user_id', $user->id);
-
+        
         if ($request->filled('type')) {
             $query->where('type', $request->type);
         }

@@ -3,7 +3,7 @@
 
 @include('shared.head')
 
-<body class="bg-gray-400 font-sans antialiased">
+<body class="font-sans antialiased min-h-screen flex flex-col">
 
     @include('components.admin.header')
 
