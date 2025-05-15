@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-theme="corporate">
+<html lang="pt-BR">
 
 @include('shared.head')
 
