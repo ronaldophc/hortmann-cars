@@ -1,6 +1,6 @@
-<div class="card bg-base-200 w-96 shadow-sm">
+<a class="card bg-base-200 w-96 shadow-sm" href="{{ route('admin.vehicles.show', $vehicle->id) }}">
     <figure>
-        <img src="{{ strtolower($vehicle->model) == 'hb20' ? asset('images/hb20-large.webp') : asset('images/vehicle.png') }}"
+        <img src="{{ asset('storage/vehicles/nMFXUrMZwgGtH8V8tY4yD1AdKiXS0nMif7GI0F2Y.jpg') }}"
             alt="car" />
     </figure>
     <div class="card-body">
@@ -21,4 +21,4 @@
             <button class="btn btn-ghost">Ver detalhes</button>
         </div>
     </div>
-</div>
+</a>

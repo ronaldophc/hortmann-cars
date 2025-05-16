@@ -1,18 +1,20 @@
 @extends('layouts.admin')
 @section('content')
-    <section class="bg-base-200 max-w-8xl mx-auto my-3 p-6 shadow-md md:my-8 md:rounded-md">
-        <h2 class="text-xl font-bold">Criar Veículo</h2>
+    <fieldset class="fieldset bg-base-200 border-base-300 rounded-box mx-auto border p-4">
+        <legend class="fieldset-legend">Criar Veículo</legend>
 
-        <form action="{{ route('admin.vehicles.store') }}" method="POST">
+        <form action="{{ route('admin.vehicles.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <input hidden name="is_active" value="1" />
             <div class="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3">
                 <div>
                     <label for="type">Tipo<span class="text-error">*</span></label>
-                    <select id="type" name="type" class="select mt-1 w-full cursor-pointer">
+                    <select id="type" name="type" class="select validator mt-1 w-full cursor-pointer" required>
+                        <option value="" disabled selected>Selecione o tipo</option>
                         <option value="car" {{ old('type') == 'car' ? 'selected' : '' }}>Carro</option>
                         <option value="motorcycle" {{ old('type') == 'motorcycle' ? 'selected' : '' }}>Moto</option>
                     </select>
+                    <p class="validator-hint hidden">Selecione o tipo do veículo</p>
                     @error('type')
                         <div class="text-error mt-1 text-sm">{{ $message }}</div>
                     @enderror
@@ -78,8 +80,8 @@
 
                 <div>
                     <label for="doors">Portas</label>
-                    <input id="doors" name="doors" type="number" min="1" max="5"
-                        value="{{ old('doors') }}" class="input mt-1 block w-full" min="1" max="6">
+                    <input id="doors" name="doors" type="number" value="{{ old('doors') }}"
+                        class="input mt-1 block w-full">
                     @error('doors')
                         <div class="text-error mt-1 text-sm font-bold">{{ $message }}</div>
                     @enderror
@@ -87,8 +89,8 @@
 
                 <div>
                     <label for="year">Ano</label>
-                    <input id="year" name="year" type="number" placeholder="YYYY" value="{{ old('year') }}"
-                        class="input mt-1 block w-full" min="1900" max="2026">
+                    <input id="year" name="year" type="number" value="{{ old('year') }}"
+                        class="input mt-1 block w-full">
                     @error('year')
                         <div class="text-error mt-1 text-sm font-bold">{{ $message }}</div>
                     @enderror
@@ -105,10 +107,9 @@
 
                 <div>
                     <label for="price">Preço<span class="text-error">*</span></label>
-                    <label class="input">
+                    <label class="input" for="price">
                         R$
-                        <input id="price" name="price" type="text" value="{{ old('price') }}"
-                            class="input mt-1 block w-full" placeholder="R$ 0,00">
+                        <input id="price" name="price" type="text" value="{{ old('price') }}" class="mt-1 grow">
                     </label>
                     @error('price')
                         <div class="text-error mt-1 text-sm font-bold">{{ $message }}</div>
@@ -127,7 +128,7 @@
                 <div>
                     <label class="" for="images">Imagens</label>
                     <input type="file" class="file-input file-input-md file-input-neutral mt-1 block w-full"
-                        id="images" name="images" />
+                        id="images" name="images[]" multiple/>
                 </div>
 
                 <div class="sm:col-span-2">
@@ -143,7 +144,7 @@
                 <button type="submit" class="btn btn-outline cursor-pointer">Salvar</button>
             </div>
         </form>
-    </section>
+    </fieldset>
 @endsection
 
 <script>

@@ -47,12 +47,24 @@ class VehicleController extends Controller
     {
         DB::beginTransaction();
         $user = Auth::user();
-
+        
         try {
             $data = $request->validated();
+            
             $data['user_id'] = $user->id;
-
+            $data['price'] = str_replace(',', '.', str_replace('.', '', $data['price']));
             $vehicle = Vehicle::create($data);
+            if ($request->hasFile('images')) {
+                foreach ($request->file('images') as $image) {
+                    Log::info('File: ' . $image);
+                    $name = $image->hashName();
+                    $path = $image->storeAs('vehicles', $name, 'public');
+                    $vehicle->images()->create([
+                        'path' => $path,
+                    ]);
+                }
+            }
+
             DB::commit();
             return redirect(route('admin.vehicles.show', $vehicle->id))
                 ->with('success', 'Veículo cadastrado com sucesso!');

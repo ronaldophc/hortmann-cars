@@ -6,10 +6,9 @@
         
     </aside>
     <nav>
-        <h6 class="footer-title">Services</h6>
+        <h6 class="footer-title">Mapa do Site</h6>
         <a class="link link-hover">Nossos carros</a>
         <a class="link link-hover">Venda seu carro</a>
-        <h6 class="footer-title mt-2">Institucional</h6>
         <a class="link link-hover">Sobre nós</a>
         <a class="link link-hover">Contato</a>
     </nav>
@@ -67,7 +66,7 @@
     </aside>
     <nav>
         <div class="grid grid-flow-col gap-4">
-            <a>
+            <a href="https://github.com/ronaldophc" target="_blank" class="link link-hover" aria-label="Github">
                 <svg class="fill-current" width="36" height="36" viewBox="0 0 24 24" role="img"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -76,7 +75,7 @@
                 </svg>
 
             </a>
-            <a>
+            <a href="https://www.linkedin.com/in/ronaldophc/" target="_blank" class="link link-hover">
                 <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 50 50"
                     class="fill-current">
                     <path
@@ -84,7 +83,7 @@
                     </path>
                 </svg>
             </a>
-            <a>
+            <a href="https://www.instagram.com/ronaldohortmann" target="_blank" class="link link-hover">
                 <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 50 50"
                     class="fill-current">
                     <path

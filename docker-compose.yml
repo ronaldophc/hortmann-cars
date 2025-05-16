@@ -1,5 +1,5 @@
 services:
-  # image project
+  # php
   laravel:
     build:
       context: .
@@ -11,6 +11,7 @@ services:
     networks:
       - hortmann-cars
 
+  # vite
   vite:
     image: node:18
     working_dir: /var/www
@@ -27,10 +28,10 @@ services:
     image: nginx:alpine
     restart: unless-stopped
     ports:
-      # laravel port
       - "8080:80"
     volumes:
       - ./docker/nginx/:/etc/nginx/conf.d/
+      - ./laravel/storage/app/public:/var/www/storage/app/public
       - ./laravel/public:/var/www/public
     networks:
       - hortmann-cars

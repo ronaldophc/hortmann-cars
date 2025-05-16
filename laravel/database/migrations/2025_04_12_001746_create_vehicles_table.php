@@ -26,7 +26,6 @@ return new class extends Migration
             $table->string('license_plate')->nullable()->unique(); // Não exibido publicamente - Placa do veículo
             $table->text('description')->nullable();
             $table->boolean('is_active')->default(true); // Se o veículo está ativo ou não
-            $table->string('image')->nullable(); // URL da imagem do veículo
 
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // ID do usuário que cadastrou o veículo
 
