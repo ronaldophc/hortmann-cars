@@ -1,29 +1,38 @@
-<header class="body-font bg-gray-900 text-gray-400">
-    <div class="container mx-auto flex flex-col flex-wrap items-center p-2 md:flex-row">
-        <a class="title-font mb-4 flex items-center font-medium text-white md:mb-0" href="{{ route('admin.vehicles.index') }}">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-10 w-10">
-            <span class="ml-3 text-xl">{{ config('app.name') }}</span>
-        </a>
-
-        <nav
-            class="flex flex-wrap items-center justify-center text-base md:ml-4 md:mr-auto md:border-l md:border-gray-700 md:py-1 md:pl-4">
-            <a class="mr-5 cursor-pointer leading-8 hover:text-white" href="{{ route('admin.vehicles.index') }}">Home</a>
-            <a class="mr-5 cursor-pointer leading-8 hover:text-white" target="_blank" href="{{ route('home') }}">Ver Site</a>
-        </nav>
-
-        <div class="flex flex-wrap justify-center gap-2 md:justify-end">
-            <a href="{{ route('admin.vehicles.create') }}"
-                class="inline-flex cursor-pointer items-center rounded border-0 bg-green-500 px-3 text-base text-black hover:bg-green-600 focus:outline-none md:mt-0">
-                Criar Veículo
-            </a>
-            <form action="{{ route('admin.logout') }}" method="POST" class="flex items-center">
-                @csrf
-                <button
-                    class="inline-flex cursor-pointer items-center rounded border-0 bg-red-500 px-3 text-base text-black hover:bg-red-600 focus:outline-none md:mt-0">
-                    <span class="leading-8">Sair</span>
-                </button>
-            </form>
+<div class="navbar bg-base-300">
+    <div class="navbar-start">
+        <div class="dropdown">
+            <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+                </svg>
+            </div>
+            <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                <li><a href="{{ route('admin.vehicles.index') }}">Home</a></li>
+                <li><a href="{{ route('admin.vehicles.create') }}">Criar Veículo</a></li>
+                <li><a target="_blank" href="{{ route('home') }}">Ver Site</a></li>
+            </ul>
         </div>
-
+        <a class="btn btn-ghost flex items-center text-xl" href="{{ route('admin.vehicles.index') }}">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-10 w-10">
+            <span>{{ config('app.name') }}</span>
+        </a>
     </div>
-</header>
+    <div class="navbar-center hidden lg:flex">
+        <ul class="menu menu-horizontal px-1">
+            <li><a href="{{ route('admin.vehicles.index') }}">Home</a></li>
+            <li><a href="{{ route('admin.vehicles.create') }}">Criar Veículo</a></li>
+            <li><a target="_blank" href="{{ route('home') }}">Ver Site</a></li>
+        </ul>
+    </div>
+    <div class="navbar-end gap-1">
+        <form action="{{ route('admin.logout') }}" method="POST" class="flex items-center">
+            @csrf
+            <button
+                class="inline-flex cursor-pointer items-center rounded border-0 bg-red-500 px-2 text-base text-black hover:bg-red-600 focus:outline-none md:mt-0">
+                <span class="leading-8">Sair</span>
+            </button>
+        </form>
+        @include('components.theme-controller')
+    </div>
+</div>

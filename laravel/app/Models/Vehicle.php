@@ -38,13 +38,17 @@ class Vehicle extends Model
         return $this->hasMany(Image::class);
     }
 
-    public function getImageUrl()
+    public function getMainImage()
     {
-        if ($this->images->isNotEmpty()) {
-            return Storage::url($this->images->first()->path);
+        $image = $this->images()->where('is_main', true)->first();
+        if ($image) {
+            return asset('storage/' . $image->path);
         }
-
-        return asset('images/default.png');
+        $image = $this->images()->first();
+        if ($image) {
+            return asset('storage/' . $image->path);
+        }
+        return asset('storage/vehicles/vehicle.png');
     }
 
     public function getAttributeFormated($attribute)
@@ -55,6 +59,9 @@ class Vehicle extends Model
         }
 
         if ($attribute == 'mileage') {
+            if (empty($this->attributes[$attribute])) {
+                return '';
+            }
             return number_format($this->attributes[$attribute], 0, ',', '.');
         }
 
@@ -63,14 +70,23 @@ class Vehicle extends Model
         }
 
         if ($attribute == 'doors') {
+            if (empty($this->attributes[$attribute])) {
+                return '';
+            }
             return $this->attributes[$attribute] . ' portas';
         }
 
         if ($attribute == 'transmission') {
+            if (empty($this->attributes[$attribute])) {
+                return '';
+            }
             return $this->attributes[$attribute] == 'automatic' ? 'Automática' : 'Manual';
         }
 
         if ($attribute == 'steering_type') {
+            if (empty($this->attributes[$attribute])) {
+                return '';
+            }
             return $this->attributes[$attribute] == 'hydraulic' ? 'Hidráulica' : 'Mecânica';
         }
 

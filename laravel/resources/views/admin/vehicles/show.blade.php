@@ -1,59 +1,59 @@
 @extends('layouts.admin')
 @section('content')
     <div class="container">
-        <section class="body-font overflow-hidden text-gray-600">
+        <section class="body-font overflow-hidden">
             <div class="container mx-auto px-5 py-24">
-                <div class="mx-auto flex flex-wrap lg:w-4/5">
-                    <div class="mb-6 w-full lg:mb-0 lg:w-1/2 lg:py-6 lg:pr-10">
-                        <h2 class="title-font text-sm tracking-widest text-gray-500">{{ $vehicle->manufacturer }}</h2>
-                        <h1 class="title-font text-3xl font-medium text-gray-900">{{ $vehicle->model }}</h1>
-                        <div class="mb-4 flex">
-                            <a class="flex-grow border-b-2 border-gray-300 px-1 py-2 text-lg"></a>
+                <div class="mx-auto flex flex-col md:flex-row lg:w-4/5">
+                    <div class="mb-6 ms-4 w-full lg:mb-0 lg:w-1/2 lg:py-6 lg:pr-10">
+                        <h2 class="title-font text-md tracking-widest">{{ $vehicle->manufacturer }}</h2>
+                        <h1 class="title-font text-3xl font-medium">{{ $vehicle->model }}</h1>
+                        @if (!empty($vehicle->description))
+                            <div class="mb-4 flex">
+                                <a class="flex-grow border-b-2 px-1 py-2 text-lg"></a>
+                            </div>
+                            <p class="mb-4 leading-relaxed">{{ $vehicle->description }}</p>
+                        @endif
+                        <div class="border-secondary-content flex border-t py-2">
+                            <span class="text-primary font-semibold">Tipo</span>
+                            <span class="ml-auto">{{ $vehicle->getAttributeFormated('type') }}</span>
                         </div>
-                        <p class="mb-4 leading-relaxed">{{ $vehicle->description }}</p>
-                        <div class="flex border-t border-gray-200 py-2">
-                            <span class="text-gray-500">Tipo</span>
-                            <span class="ml-auto text-gray-900">{{ $vehicle->getAttributeFormated('type') }}</span>
+                        <div class="border-secondary-content flex border-t py-2">
+                            <span class="text-primary font-semibold">Tipo de Combustível</span>
+                            <span class="ml-auto">{{ $vehicle->getAttributeFormated('fuel_type') }}</span>
                         </div>
-                        <div class="flex border-t border-gray-200 py-2">
-                            <span class="text-gray-500">Tipo de Combustível</span>
-                            <span class="ml-auto text-gray-900">{{ $vehicle->getAttributeFormated('fuel_type') }}</span>
+                        <div class="border-secondary-content flex border-t py-2">
+                            <span class="text-primary font-semibold">Direção</span>
+                            <span class="ml-auto">{{ $vehicle->getAttributeFormated('steering_type') }}</span>
                         </div>
-                        <div class="flex border-t border-gray-200 py-2">
-                            <span class="text-gray-500">Direção</span>
-                            <span class="ml-auto text-gray-900">{{ $vehicle->getAttributeFormated('steering_type') }}</span>
+                        <div class="border-secondary-content flex border-t py-2">
+                            <span class="text-primary font-semibold">Portas</span>
+                            <span class="ml-auto">{{ $vehicle->getAttributeFormated('doors') }}</span>
                         </div>
-                        <div class="flex border-t border-gray-200 py-2">
-                            <span class="text-gray-500">Portas</span>
-                            <span class="ml-auto text-gray-900">{{ $vehicle->getAttributeFormated('doors') }}</span>
+                        <div class="border-secondary-content flex border-t py-2">
+                            <span class="text-primary font-semibold">Ano</span>
+                            <span class="ml-auto">{{ $vehicle->getAttributeFormated('year') }}</span>
                         </div>
-                        <div class="flex border-t border-gray-200 py-2">
-                            <span class="text-gray-500">Ano</span>
-                            <span class="ml-auto text-gray-900">{{ $vehicle->getAttributeFormated('year') }}</span>
+                        <div class="border-secondary-content flex border-t py-2">
+                            <span class="text-primary font-semibold">Quilometragem</span>
+                            <span class="ml-auto">{{ $vehicle->getAttributeFormated('mileage') }}</span>
                         </div>
-                        <div class="flex border-t border-gray-200 py-2">
-                            <span class="text-gray-500">Quilometragem</span>
-                            <span class="ml-auto text-gray-900">{{ $vehicle->getAttributeFormated('mileage') }}</span>
+                        <div class="border-secondary-content flex border-t py-2">
+                            <span class="text-primary font-semibold">Transmissão</span>
+                            <span class="ml-auto">{{ $vehicle->getAttributeFormated('transmission') }}</span>
                         </div>
-                        <div class="flex border-t border-gray-200 py-2">
-                            <span class="text-gray-500">Transmissão</span>
-                            <span class="ml-auto text-gray-900">{{ $vehicle->getAttributeFormated('transmission') }}</span>
+                        <div class="border-secondary-content flex border-t py-2">
+                            <span class="text-primary font-semibold">Placa</span>
+                            <span class="ml-auto">{{ $vehicle->getAttributeFormated('license_plate') }}</span>
                         </div>
-                        <div class="flex border-t border-gray-200 py-2">
-                            <span class="text-gray-500">Placa</span>
-                            <span
-                                class="ml-auto text-gray-900">{{ $vehicle->getAttributeFormated('license_plate') }}</span>
-                        </div>
-                        <div class="flex border-t border-gray-200 py-2">
-                            <span class="text-gray-500">Ativo</span>
-                            <span
-                                class="ml-auto text-gray-900">{{ $vehicle->getAttributeFormated('is_active') }}</span>
+                        <div class="border-secondary-content flex border-t py-2">
+                            <span class="text-primary font-semibold">Ativo</span>
+                            <span class="ml-auto">{{ $vehicle->getAttributeFormated('is_active') }}</span>
                         </div>
 
                         <div class="flex">
-                            <span class="title-font text-2xl font-medium text-gray-900">R${{ $vehicle->price }}</span>
+                            <span class="title-font text-info text-2xl font-bold">R${{ $vehicle->price }}</span>
                             <a href="{{ route('admin.vehicles.edit', $vehicle->id) }}"
-                                class="ml-auto flex cursor-pointer rounded border-0 bg-gray-700 px-6 py-2 text-white hover:bg-gray-800 focus:outline-none">Editar</a>
+                                class="btn btn-warning ml-auto">Editar</a>
                             <button onclick="confirmDelete({{ $vehicle->id }})"
                                 class="ml-4 inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-0 bg-gray-200 p-0 text-red-500 hover:bg-gray-300 focus:outline-none">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" stroke-linecap="round"
@@ -65,10 +65,57 @@
                             </button>
                         </div>
                     </div>
-                    <img alt="ecommerce" class="h-64 w-full rounded object-cover object-center lg:h-auto lg:w-1/2"
-                        src="https://dummyimage.com/400x400">
+                    <div class="carousel carousel-center w-full md:w-160">
+                        @php
+                            $images = $vehicle->images ?? [];
+                            $hasImages = count($images) > 1;
+                        @endphp
+
+                        @if (count($images) > 1)
+                            @foreach ($images as $index => $image)
+                                <div id="slide{{ $index + 1 }}" class="carousel-item relative flex w-full items-center">
+                                    <a href="#slide{{ $index === 0 ? count($images) : $index }}"
+                                        class="btn btn-circle z-10">❮</a>
+                                    <div class="relative flex w-full flex-col items-center justify-center">
+                                        <img alt="Foto do veículo"
+                                            class="h-64 md:h-128 mx-2 w-full object-cover object-center lg:h-auto lg:w-1/2 border-1 rounded-2xl"
+                                            src="{{ asset('storage/' . $image->path) }}">
+                                        {{-- Botão ou selo embaixo da imagem --}}
+                                        <div class="mt-2">
+                                            @if ($image->is_main)
+                                                <span
+                                                    class="btn btn-success btn-outline">Capa</span>
+                                            @else
+                                                <form method="POST">
+                                                    {{-- action="{{ route('admin.vehicles.setMainImage', [$vehicle->id, $image->id]) }}"> --}}
+                                                    @csrf
+                                                    <button type="submit"
+                                                        class="btn border-info bg-info-conent text-info rounded px-2 py-1 text-xs">
+                                                        Definir como capa
+                                                    </button>
+                                                </form>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <a href="#slide{{ $index + 2 > count($images) ? 1 : $index + 2 }}"
+                                        class="btn btn-circle z-10">❯</a>
+                                </div>
+                            @endforeach
+                        @elseif (count($images) === 1)
+                            <div id="slide1" class="carousel-item relative flex w-full items-center">
+                                <img alt="ecommerce"
+                                    class="mx-2 min-h-64 w-full rounded object-cover object-center lg:h-auto lg:w-1/2"
+                                    src="{{ asset('storage/' . $images[0]->path) }}">
+                            </div>
+                        @else
+                            <div id="slide1" class="carousel-item relative flex w-full items-center">
+                                <img alt="ecommerce"
+                                    class="mx-2 h-64 w-full rounded object-cover object-center lg:h-auto lg:w-1/2"
+                                    src="{{ asset('storage/vehicles/vehicle.png') }}">
+                            </div>
+                        @endif
+                    </div>
                 </div>
-            </div>
         </section>
     </div>
     <form id="delete-form-{{ $vehicle->id }}" action="{{ route('admin.vehicles.destroy', $vehicle->id) }}" method="POST"

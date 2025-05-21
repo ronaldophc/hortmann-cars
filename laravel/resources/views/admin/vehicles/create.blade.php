@@ -41,6 +41,7 @@
                 <div>
                     <label for="fuel_type">Tipo de Combustível</label>
                     <select id="fuel_type" name="fuel_type" class="select mt-1 w-full cursor-pointer">
+                        <option value="" disabled selected>Selecione</option>
                         <option value="gasoline" {{ old('fuel_type') == 'gasoline' ? 'selected' : '' }}>Gasolina</option>
                         <option value="alcohol" {{ old('fuel_type') == 'alcohol' ? 'selected' : '' }}>Álcool</option>
                         <option value="flex" {{ old('fuel_type') == 'flex' ? 'selected' : '' }}>Flex</option>
@@ -54,6 +55,7 @@
                 <div>
                     <label for="steering_type">Tipo de Direção</label>
                     <select id="steering_type" name="steering_type" class="select mt-1 w-full cursor-pointer">
+                        <option value="" disabled selected>Selecione a direção</option>
                         <option value="mechanical" {{ old('steering_type') == 'mechanical' ? 'selected' : '' }}>Mecânica
                         </option>
                         <option value="hydraulic" {{ old('steering_type') == 'hydraulic' ? 'selected' : '' }}>Hidráulica
@@ -69,6 +71,7 @@
                 <div>
                     <label for="transmission">Transmissão</label>
                     <select id="transmission" name="transmission" class="select mt-1 w-full cursor-pointer">
+                        <option value="" disabled selected>Selecione</option>
                         <option value="manual" {{ old('transmission') == 'manual' ? 'selected' : '' }}>Manual</option>
                         <option value="automatic" {{ old('transmission') == 'automatic' ? 'selected' : '' }}>Automática
                         </option>

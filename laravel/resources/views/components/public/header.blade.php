@@ -1,4 +1,3 @@
-{{-- filepath: /home/ronaldo/web/utfpr/sistemas/back-framework/hortmann-cars/laravel/resources/views/components/public/header.blade.php --}}
 <div class="navbar">
     <div class="navbar-start">
         <div class="dropdown">

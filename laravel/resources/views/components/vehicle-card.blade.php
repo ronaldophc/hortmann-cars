@@ -1,6 +1,6 @@
-<a class="card bg-base-200 w-96 shadow-sm" href="{{ route('admin.vehicles.show', $vehicle->id) }}">
+<a class="card bg-base-200 w-80 shadow-sm" href="{{ route('admin.vehicles.show', $vehicle->id) }}">
     <figure>
-        <img src="{{ asset('storage/vehicles/nMFXUrMZwgGtH8V8tY4yD1AdKiXS0nMif7GI0F2Y.jpg') }}"
+        <img class='w-full h-52' src="{{ $vehicle->getMainImage() }}"
             alt="car" />
     </figure>
     <div class="card-body">
@@ -8,7 +8,9 @@
             {{ $vehicle->getAttributeFormated('manufacturer') }} {{ $vehicle->getAttributeFormated('model') }}
         </h2>
         <div>
-            <div class="badge badge-neutral"> {{ $vehicle->getAttributeFormated('year') }}</div>
+            @if (!empty($vehicle->year))
+                <div class="badge badge-neutral"> {{ $vehicle->getAttributeFormated('year') }}</div>
+            @endif
             @if (!empty($vehicle->mileage))
                 <div class="badge badge-neutral"> {{ $vehicle->getAttributeFormated('mileage') }} km</div>
             @endif
