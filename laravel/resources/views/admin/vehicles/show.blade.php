@@ -2,9 +2,9 @@
 @section('content')
     <div class="container">
         <section class="body-font overflow-hidden">
-            <div class="container mx-auto px-5 py-24">
-                <div class="mx-auto flex flex-col md:flex-row lg:w-4/5">
-                    <div class="mb-6 ms-4 w-full lg:mb-0 lg:w-1/2 lg:py-6 lg:pr-10">
+            <div class="container px-5 py-24">
+                <div class="flex flex-col md:mx-auto md:flex-row lg:w-4/5">
+                    <div class="mb-6 w-full lg:mb-0 lg:w-1/2 lg:py-6 lg:pr-10">
                         <h2 class="title-font text-md tracking-widest">{{ $vehicle->manufacturer }}</h2>
                         <h1 class="title-font text-3xl font-medium">{{ $vehicle->model }}</h1>
                         @if (!empty($vehicle->description))
@@ -13,42 +13,15 @@
                             </div>
                             <p class="mb-4 leading-relaxed">{{ $vehicle->description }}</p>
                         @endif
-                        <div class="border-secondary-content flex border-t py-2">
-                            <span class="text-primary font-semibold">Tipo</span>
-                            <span class="ml-auto">{{ $vehicle->getAttributeFormated('type') }}</span>
-                        </div>
-                        <div class="border-secondary-content flex border-t py-2">
-                            <span class="text-primary font-semibold">Tipo de Combustível</span>
-                            <span class="ml-auto">{{ $vehicle->getAttributeFormated('fuel_type') }}</span>
-                        </div>
-                        <div class="border-secondary-content flex border-t py-2">
-                            <span class="text-primary font-semibold">Direção</span>
-                            <span class="ml-auto">{{ $vehicle->getAttributeFormated('steering_type') }}</span>
-                        </div>
-                        <div class="border-secondary-content flex border-t py-2">
-                            <span class="text-primary font-semibold">Portas</span>
-                            <span class="ml-auto">{{ $vehicle->getAttributeFormated('doors') }}</span>
-                        </div>
-                        <div class="border-secondary-content flex border-t py-2">
-                            <span class="text-primary font-semibold">Ano</span>
-                            <span class="ml-auto">{{ $vehicle->getAttributeFormated('year') }}</span>
-                        </div>
-                        <div class="border-secondary-content flex border-t py-2">
-                            <span class="text-primary font-semibold">Quilometragem</span>
-                            <span class="ml-auto">{{ $vehicle->getAttributeFormated('mileage') }}</span>
-                        </div>
-                        <div class="border-secondary-content flex border-t py-2">
-                            <span class="text-primary font-semibold">Transmissão</span>
-                            <span class="ml-auto">{{ $vehicle->getAttributeFormated('transmission') }}</span>
-                        </div>
-                        <div class="border-secondary-content flex border-t py-2">
-                            <span class="text-primary font-semibold">Placa</span>
-                            <span class="ml-auto">{{ $vehicle->getAttributeFormated('license_plate') }}</span>
-                        </div>
-                        <div class="border-secondary-content flex border-t py-2">
-                            <span class="text-primary font-semibold">Ativo</span>
-                            <span class="ml-auto">{{ $vehicle->getAttributeFormated('is_active') }}</span>
-                        </div>
+                        <x-show-car-detail name="Tipo" :value="$vehicle->getAttributeFormated('type')" />
+                        <x-show-car-detail name="Tipo de Combustível" :value="$vehicle->getAttributeFormated('fuel_type')" />
+                        <x-show-car-detail name="Direção" :value="$vehicle->getAttributeFormated('steering_type')" />
+                        <x-show-car-detail name="Portas" :value="$vehicle->getAttributeFormated('doors')" />
+                        <x-show-car-detail name="Ano" :value="$vehicle->getAttributeFormated('year')" />
+                        <x-show-car-detail name="Quilometragem" :value="$vehicle->getAttributeFormated('mileage')" />
+                        <x-show-car-detail name="Transmissão" :value="$vehicle->getAttributeFormated('transmission')" />
+                        <x-show-car-detail name="Placa" :value="$vehicle->getAttributeFormated('license_plate')" />
+                        <x-show-car-detail name="Ativo" :value="$vehicle->getAttributeFormated('is_active')" />
 
                         <div class="flex">
                             <span class="title-font text-info text-2xl font-bold">R${{ $vehicle->price }}</span>
@@ -65,55 +38,10 @@
                             </button>
                         </div>
                     </div>
-                    <div class="carousel carousel-center w-full md:w-160">
-                        @php
-                            $images = $vehicle->images ?? [];
-                            $hasImages = count($images) > 1;
-                        @endphp
-
-                        @if (count($images) > 1)
-                            @foreach ($images as $index => $image)
-                                <div id="slide{{ $index + 1 }}" class="carousel-item relative flex w-full items-center">
-                                    <a href="#slide{{ $index === 0 ? count($images) : $index }}"
-                                        class="btn btn-circle z-10">❮</a>
-                                    <div class="relative flex w-full flex-col items-center justify-center">
-                                        <img alt="Foto do veículo"
-                                            class="h-64 md:h-128 mx-2 w-full object-cover object-center lg:h-auto lg:w-1/2 border-1 rounded-2xl"
-                                            src="{{ asset('storage/' . $image->path) }}">
-                                        {{-- Botão ou selo embaixo da imagem --}}
-                                        <div class="mt-2">
-                                            @if ($image->is_main)
-                                                <span
-                                                    class="btn btn-success btn-outline">Capa</span>
-                                            @else
-                                                <form method="POST">
-                                                    {{-- action="{{ route('admin.vehicles.setMainImage', [$vehicle->id, $image->id]) }}"> --}}
-                                                    @csrf
-                                                    <button type="submit"
-                                                        class="btn border-info bg-info-conent text-info rounded px-2 py-1 text-xs">
-                                                        Definir como capa
-                                                    </button>
-                                                </form>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <a href="#slide{{ $index + 2 > count($images) ? 1 : $index + 2 }}"
-                                        class="btn btn-circle z-10">❯</a>
-                                </div>
-                            @endforeach
-                        @elseif (count($images) === 1)
-                            <div id="slide1" class="carousel-item relative flex w-full items-center">
-                                <img alt="ecommerce"
-                                    class="mx-2 min-h-64 w-full rounded object-cover object-center lg:h-auto lg:w-1/2"
-                                    src="{{ asset('storage/' . $images[0]->path) }}">
-                            </div>
-                        @else
-                            <div id="slide1" class="carousel-item relative flex w-full items-center">
-                                <img alt="ecommerce"
-                                    class="mx-2 h-64 w-full rounded object-cover object-center lg:h-auto lg:w-1/2"
-                                    src="{{ asset('storage/vehicles/vehicle.png') }}">
-                            </div>
-                        @endif
+                    @php
+                        $images = $vehicle->getOrderedImages() ?? [];
+                    @endphp
+                    <x-admin.vehicle-image-carousel :images="$images" />
                     </div>
                 </div>
         </section>

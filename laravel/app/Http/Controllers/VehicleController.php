@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\VehicleStoreRequest;
 use App\Http\Requests\VehicleUpdateRequest;
+use App\Models\Image;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -123,4 +124,5 @@ class VehicleController extends Controller
                 ->with('error', $e->getMessage());
         }
     }
+
 }

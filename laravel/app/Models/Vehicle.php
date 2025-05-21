@@ -48,8 +48,21 @@ class Vehicle extends Model
         if ($image) {
             return asset('storage/' . $image->path);
         }
-        return asset('storage/vehicles/vehicle.png');
+        return 'https://placehold.co/600x400?text=Sem+Fotos';
     }
+
+    public function getOrderedImages()
+{
+    $images = $this->images()->get();
+
+    $main = $images->firstWhere('is_main', true);
+
+    if ($main) {
+        $images = $images->reject(fn($img) => $img->id === $main->id)->prepend($main)->values();
+    }
+
+    return $images;
+}
 
     public function getAttributeFormated($attribute)
     {

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\VehicleController;
+use App\Http\Controllers\VehicleImageController;
 
 Route::get('/', [PublicController::class, 'index'])
     ->name('home');
@@ -38,6 +39,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
             'update' => 'admin.vehicles.update',
             'destroy' => 'admin.vehicles.destroy',
         ]);
+
+    Route::resource('images', VehicleImageController::class)
+        ->names([
+            'store' => 'admin.images.store',
+            'destroy' => 'admin.images.destroy',
+            'update' => 'admin.images.update',
+        ]);
+
 });
-
-
