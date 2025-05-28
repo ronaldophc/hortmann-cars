@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\VehicleStoreRequest;
 use App\Http\Requests\VehicleUpdateRequest;
+use App\Models\Image;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +18,7 @@ class VehicleController extends Controller
         $query = Vehicle::query();
         $user = Auth::user();
         $query->where('user_id', $user->id);
-
+        
         if ($request->filled('type')) {
             $query->where('type', $request->type);
         }
@@ -47,12 +48,24 @@ class VehicleController extends Controller
     {
         DB::beginTransaction();
         $user = Auth::user();
-
+        
         try {
             $data = $request->validated();
+            
             $data['user_id'] = $user->id;
-
+            $data['price'] = str_replace(',', '.', str_replace('.', '', $data['price']));
             $vehicle = Vehicle::create($data);
+            if ($request->hasFile('images')) {
+                foreach ($request->file('images') as $image) {
+                    Log::info('File: ' . $image);
+                    $name = $image->hashName();
+                    $path = $image->storeAs('vehicles', $name, 'public');
+                    $vehicle->images()->create([
+                        'path' => $path,
+                    ]);
+                }
+            }
+
             DB::commit();
             return redirect(route('admin.vehicles.show', $vehicle->id))
                 ->with('success', 'Veículo cadastrado com sucesso!');
@@ -82,7 +95,9 @@ class VehicleController extends Controller
         DB::beginTransaction();
 
         try {
-            $vehicle->update($request->validated());
+            $data = $request->validated();
+            $data['price'] = str_replace(',', '.', str_replace('.', '', $data['price']));
+            $vehicle->update($data);
             DB::commit();
             return redirect(route('admin.vehicles.edit', $vehicle->id))
                 ->with('success', 'Veículo atualizado com sucesso!');
@@ -111,4 +126,5 @@ class VehicleController extends Controller
                 ->with('error', $e->getMessage());
         }
     }
+
 }

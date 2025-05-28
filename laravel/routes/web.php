@@ -4,12 +4,20 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\VehicleController;
+use App\Http\Controllers\VehicleImageController;
 
 Route::get('/', [PublicController::class, 'index'])
     ->name('home');
 
+Route::get('/teste', function () {
+    return view('welcome');
+});
+
 Route::get('/contact', [PublicController::class, 'contact'])
     ->name('contact');
+
+Route::get('/stock', [PublicController::class, 'stock'])
+    ->name('stock');
 
 Route::get('/login', [AuthController::class, 'login'])
     ->middleware('guest')
@@ -34,6 +42,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
             'update' => 'admin.vehicles.update',
             'destroy' => 'admin.vehicles.destroy',
         ]);
+
+    Route::resource('images', VehicleImageController::class)
+        ->names([
+            'destroy' => 'admin.images.destroy',
+            'update' => 'admin.images.update',
+        ]);
+
+    Route::post('/vehicles/{vehicle}/images', [VehicleImageController::class, 'store'])
+        ->name('admin.vehicles.images.store');
 });
-
-

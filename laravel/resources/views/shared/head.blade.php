@@ -20,7 +20,8 @@
     <meta name="msapplication-TileImage" content="{{ asset('images/favicon/ms-icon-144x144.png') }}">
     <meta name="theme-color" content="#ffffff">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <title>{{ env('APP_NAME') }}</title>
+    <title>{{ config('app.name') }}</title>
 
+    @vite('resources/js/app.js')
     @vite('resources/css/app.css')
 </head>

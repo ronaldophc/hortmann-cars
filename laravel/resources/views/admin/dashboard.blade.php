@@ -4,15 +4,15 @@
         <div class="mx-auto w-full max-w-7xl px-4 md:px-8">
             <form action="{{ route('admin.vehicles.index') }}" method="GET" class="mb-6">
                 <div class="flex flex-wrap justify-between gap-4">
-                    <select name="type" class="rounded border-2 border-gray-500 px-4 py-2">
+                    <select name="type" class="select">
                         <option value="">Todos os Tipos</option>
                         <option value="car" {{ request('type') == 'car' ? 'selected' : '' }}>Carro</option>
                         <option value="motorcycle" {{ request('type') == 'motorcycle' ? 'selected' : '' }}>Moto</option>
                     </select>
 
                     <div>
-                        <select name="sort" class="rounded border-2 border-gray-500 px-4 py-2">
-                            <option value="">Ordenar por</option>
+                        <select name="sort" class="select">
+                            <option value="" disabled>Ordenar por</option>
                             <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>Preço (Menor
                                 para Maior)</option>
                             <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>Preço (Maior

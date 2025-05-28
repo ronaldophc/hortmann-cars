@@ -1,5 +1,7 @@
-@extends('layouts.public')
+@include('shared.head')
+<html data-theme="cupcake">
+<div class="flex h-screen items-center justify-center">
+    <button class="btn btn-accent btn-wide">Teste</button>
+</div>
+</html>
 
-@section('content')
-    <h1 class="bg-amber-200">Teste</h1>
-@endSection

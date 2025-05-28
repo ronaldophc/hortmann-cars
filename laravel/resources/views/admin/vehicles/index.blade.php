@@ -1,17 +1,17 @@
 @extends('layouts.admin')
 @section('content')
-    <section class="relative py-4">
+    <section class="pt-4">
         <div class="mx-auto w-full max-w-7xl px-4 md:px-8">
-            <form action="{{ route('admin.vehicles.index') }}" method="GET" class="mb-6">
+            <form action="{{ route('admin.vehicles.index') }}" method="GET" >
                 <div class="flex flex-wrap justify-between gap-4">
-                    <select name="type" class="rounded border-2 border-gray-500 px-4 py-2">
+                    <select name="type" class="select select-primary">
                         <option value="">Todos os Tipos</option>
                         <option value="car" {{ request('type') == 'car' ? 'selected' : '' }}>Carro</option>
                         <option value="motorcycle" {{ request('type') == 'motorcycle' ? 'selected' : '' }}>Moto</option>
                     </select>
 
-                    <div>
-                        <select name="sort" class="rounded border-2 border-gray-500 px-4 py-2">
+                    <div class="flex items-center gap-4">
+                        <select name="sort" class="select select-primary">
                             <option value="">Ordenar por</option>
                             <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>Preço (Menor
                                 para Maior)</option>
@@ -20,27 +20,23 @@
                         </select>
 
                         <button type="submit"
-                            class="cursor-pointer rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:outline-none">
+                            class="btn btn-accent">
                             Filtrar
                         </button>
                     </div>
                 </div>
             </form>
-            <svg class="mt-7 w-full" xmlns="http://www.w3.org/2000/svg" width="1216" height="2" viewBox="0 0 1216 2"
-                fill="none">
-                <path d="M0 1H1216" stroke="#E5E7EB" />
-            </svg>
-
         </div>
     </section>
+    <div class="divider"></div>
     <section class="body-font">
         <div class="mb-2 text-center">
-            <span class="text-md text-gray-700">
+            <span class="text-md">
                 Resultado da busca ({{ count($vehicles) }})
             </span>
         </div>
         <div class="container mx-auto px-5 pb-24">
-            <div class="-m-4 flex flex-wrap justify-center">
+            <div class="-mx-4 flex flex-wrap justify-center gap-2">
                 @foreach ($vehicles as $vehicle)
                     <x-vehicle-card :vehicle="$vehicle" />
                 @endforEach

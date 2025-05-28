@@ -1,20 +1,30 @@
-<header class="body-font bg-gray-900 text-gray-400">
-    <div class="container mx-auto flex flex-col flex-wrap items-center p-5 md:flex-row">
-        <a class="title-font mb-4 flex items-center font-medium text-white md:mb-0" href="{{ route('home') }}">
+<div class="navbar">
+    <div class="navbar-start">
+        <div class="dropdown">
+            <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+                </svg>
+            </div>
+            <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                <li><a href="{{ route('home') }}">Home</a></li>
+                <li><a href="{{ route('stock') }}">Estoque</a></li>
+                <li><a href="{{ route('contact') }}">Contato</a></li>
+            </ul>
+        </div>
+        <a class="btn btn-ghost text-xl flex items-center" href="{{ route('home') }}">
             <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-10 w-10">
-            <span class="ml-3 text-xl">{{ config('app.name') }}</span>
-        </a>
-        <nav
-            class="flex flex-wrap items-center justify-center text-base md:ml-4 md:mr-auto md:border-l md:border-gray-700 md:py-1 md:pl-4">
-            <a class="mr-5 cursor-pointer hover:text-white">Home</a>
-            <a class="mr-5 cursor-pointer hover:text-white">Estoque</a>
-            <a class="mr-5 cursor-pointer hover:text-white" href="{{ route("contact") }}">Contato</a>
-        </nav>
-        <a href="{{ route('admin.vehicles.index') }}">
-            <button
-                class="mt-4 inline-flex cursor-pointer items-center rounded border-0 bg-gray-800 px-3 py-1 text-base hover:bg-gray-700 focus:outline-none md:mt-0">
-                Login Admin
-            </button>
+            <span>{{ config('app.name') }}</span>
         </a>
     </div>
-</header>
+    <div class="navbar-center hidden lg:flex">
+        <ul class="menu menu-horizontal px-1">
+            <li><a href="{{ route('home') }}">Home</a></li>
+            <li><a href="{{ route('stock') }}">Estoque</a></li>
+            <li><a href="{{ route('contact') }}">Contato</a></li>
+        </ul>
+    </div>
+    <div class="navbar-end gap-2">
+        @include('components.theme-controller')
+    </div>
+</div>

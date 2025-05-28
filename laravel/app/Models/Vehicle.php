@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Storage;
 
 class Vehicle extends Model
 {
@@ -32,6 +33,38 @@ class Vehicle extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
+
+    public function getMainImage()
+    {
+        $image = $this->images()->where('is_main', true)->first();
+        if ($image) {
+            return asset('storage/' . $image->path);
+        }
+        
+        $image = $this->images()->first();
+        if ($image) {
+            return asset('storage/' . $image->path);
+        }
+        return 'https://placehold.co/600x400?text=Sem+Fotos';
+    }
+
+    public function getOrderedImages()
+{
+    $images = $this->images()->get();
+
+    $main = $images->firstWhere('is_main', true);
+
+    if ($main) {
+        $images = $images->reject(fn($img) => $img->id === $main->id)->prepend($main)->values();
+    }
+
+    return $images;
+}
+
     public function getAttributeFormated($attribute)
     {
         $attribute = strtolower($attribute);
@@ -40,6 +73,9 @@ class Vehicle extends Model
         }
 
         if ($attribute == 'mileage') {
+            if (empty($this->attributes[$attribute])) {
+                return '';
+            }
             return number_format($this->attributes[$attribute], 0, ',', '.');
         }
 
@@ -48,14 +84,23 @@ class Vehicle extends Model
         }
 
         if ($attribute == 'doors') {
+            if (empty($this->attributes[$attribute])) {
+                return '';
+            }
             return $this->attributes[$attribute] . ' portas';
         }
 
         if ($attribute == 'transmission') {
+            if (empty($this->attributes[$attribute])) {
+                return '';
+            }
             return $this->attributes[$attribute] == 'automatic' ? 'Automática' : 'Manual';
         }
 
         if ($attribute == 'steering_type') {
+            if (empty($this->attributes[$attribute])) {
+                return '';
+            }
             return $this->attributes[$attribute] == 'hydraulic' ? 'Hidráulica' : 'Mecânica';
         }
 
