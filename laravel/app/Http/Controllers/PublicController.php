@@ -38,4 +38,27 @@ class PublicController extends Controller
     {
         return view('public.contact');
     }
+
+    public function stock(Request $request)
+    {
+        $query = Vehicle::where('is_active', true);
+
+        if ($request->filled('type')) {
+            $query->where('type', $request->type);
+        }
+
+        if ($request->filled('sort')) {
+            if ($request->sort == 'price_asc') {
+                $query->orderBy('price', 'asc');
+            } elseif ($request->sort == 'price_desc') {
+                $query->orderBy('price', 'desc');
+            }
+        } else {
+            $query->latest();
+        }
+
+        $vehicles = $query->paginate(10);
+
+        return view('public.stock', compact('vehicles'));
+    }
 }

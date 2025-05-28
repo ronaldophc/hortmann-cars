@@ -31,7 +31,7 @@ class VehicleUpdateRequest extends FormRequest
             'doors' => 'nullable|integer|min:0|max:5',
             'year' => 'nullable|string|regex:/^\d{4}$/',
             'mileage' => 'nullable|string|max:255',
-            'price' => 'required|numeric|min:0',
+            'price' => 'required',
             'license_plate' => 'nullable|string|max:255|unique:vehicles,license_plate,' . $this->vehicle->id,
             'description' => 'nullable|string|max:1000',
             'is_active' => 'required|boolean',

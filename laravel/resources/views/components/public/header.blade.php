@@ -8,7 +8,7 @@
             </div>
             <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                 <li><a href="{{ route('home') }}">Home</a></li>
-                <li><a href="#">Estoque</a></li>
+                <li><a href="{{ route('stock') }}">Estoque</a></li>
                 <li><a href="{{ route('contact') }}">Contato</a></li>
             </ul>
         </div>
@@ -20,7 +20,7 @@
     <div class="navbar-center hidden lg:flex">
         <ul class="menu menu-horizontal px-1">
             <li><a href="{{ route('home') }}">Home</a></li>
-            <li><a href="#">Estoque</a></li>
+            <li><a href="{{ route('stock') }}">Estoque</a></li>
             <li><a href="{{ route('contact') }}">Contato</a></li>
         </ul>
     </div>

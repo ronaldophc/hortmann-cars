@@ -44,4 +44,30 @@ class VehicleImageController extends Controller
             return redirect()->back()->with('error', 'Erro ao excluir imagem.');
         }
     }
+
+    public function store(Request $request, Vehicle $vehicle)
+    {
+        $request->validate([
+            'images.*' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
+        ]);
+        DB::beginTransaction();
+
+        try {
+            if ($request->hasFile('images')) {
+                foreach ($request->file('images') as $imageFile) {
+                    $path = $imageFile->store('vehicles', 'public');
+                    $vehicle->images()->create([
+                        'path' => $path,
+                        'is_main' => false,
+                    ]);
+                }
+            }
+            DB::commit();
+            return redirect()->back()->with('success', 'Imagens adicionadas com sucesso!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Erro ao adicionar imagens: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Erro ao adicionar imagens.');
+        }
+    }
 }

@@ -1,163 +1,184 @@
+{{-- filepath: /home/ronaldo/web/utfpr/dev-web/hortmann-cars/laravel/resources/views/admin/vehicles/edit.blade.php --}}
 @extends('layouts.admin')
 @section('content')
-    <section class="mx-auto max-w-7xl p-6 shadow-md md:mt-8 md:rounded-md dark:bg-gray-900">
-        <div class="flex items-center">
-            <button onclick="history.back()"
-                class="transform cursor-pointer rounded-md bg-gray-700 px-6 py-2 me-2 leading-5 text-white transition-colors duration-300 hover:bg-gray-600 focus:bg-gray-600 focus:outline-none">
-                Voltar
-            </button>
-            <h2 class="text-lg font-semibold capitalize text-gray-700 dark:text-white">Editar Veículo</h2>
-        </div>
+    <fieldset class="fieldset bg-base-200 border-base-300 rounded-box mx-auto border p-4">
+        <legend class="fieldset-legend">Editar Veículo</legend>
 
-        <form action="{{ route('admin.vehicles.update', $vehicle->id) }}" method="POST">
+        <form action="{{ route('admin.vehicles.update', $vehicle->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            <div class="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <input hidden name="is_active" value="1" />
+            <div class="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3">
                 <div>
-                    <label class="text-gray-700 dark:text-gray-200" for="type">Tipo<span class="text-red-700">*</span></label>
-                    <select id="type" name="type"
-                        class="mt-1 block w-full cursor-pointer rounded-md border border-gray-200 bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:focus:border-blue-300">
-                        <option value="car" {{ $vehicle->type == 'car' ? 'selected' : '' }}>Carro</option>
-                        <option value="motorcycle" {{ $vehicle->type == 'motorcycle' ? 'selected' : '' }}>Moto</option>
+                    <label for="type">Tipo<span class="text-error">*</span></label>
+                    <select id="type" name="type" class="select validator mt-1 w-full cursor-pointer" required>
+                        <option value="" disabled>Selecione o tipo</option>
+                        <option value="car" {{ old('type', $vehicle->type) == 'car' ? 'selected' : '' }}>Carro</option>
+                        <option value="motorcycle" {{ old('type', $vehicle->type) == 'motorcycle' ? 'selected' : '' }}>Moto
+                        </option>
                     </select>
+                    <p class="validator-hint hidden">Selecione o tipo do veículo</p>
                     @error('type')
-                        <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                        <div class="text-error mt-1 text-sm">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div>
-                    <label class="text-gray-700 dark:text-gray-200" for="model">Modelo<span class="text-red-700">*</span></label>
-                    <input id="model" name="model" type="text" value="{{ $vehicle->model }}"
-                        class="mt-1 block w-full rounded-md border border-gray-200 bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:focus:border-blue-300">
+                    <label for="model">Modelo<span class="text-error">*</span></label>
+                    <input id="model" name="model" type="text" value="{{ old('model', $vehicle->model) }}"
+                        class="input mt-1 block w-full">
                     @error('model')
-                        <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                        <div class="text-error mt-1 text-sm font-bold">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div>
-                    <label class="text-gray-700 dark:text-gray-200" for="manufacturer">Fabricante<span class="text-red-700">*</span></label>
-                    <input id="manufacturer" name="manufacturer" type="text" value="{{ $vehicle->manufacturer }}"
-                        class="mt-1 block w-full rounded-md border border-gray-200 bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:focus:border-blue-300">
+                    <label for="manufacturer">Fabricante<span class="text-error">*</span></label>
+                    <input id="manufacturer" name="manufacturer" type="text"
+                        value="{{ old('manufacturer', $vehicle->manufacturer) }}" class="input mt-1 block w-full">
                     @error('manufacturer')
-                        <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                        <div class="text-error mt-1 text-sm font-bold">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div>
-                    <label class="text-gray-700 dark:text-gray-200" for="fuel_type">Tipo de Combustível</label>
-                    <select id="fuel_type" name="fuel_type"
-                        class="mt-1 block w-full cursor-pointer rounded-md border border-gray-200 bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:focus:border-blue-300">
-                        <option value="gasoline" {{ $vehicle->fuel_type == 'gasoline' ? 'selected' : '' }}>Gasolina</option>
-                        <option value="alcohol" {{ $vehicle->fuel_type == 'alcohol' ? 'selected' : '' }}>Álcool</option>
-                        <option value="flex" {{ $vehicle->fuel_type == 'flex' ? 'selected' : '' }}>Flex</option>
-                        <option value="diesel" {{ $vehicle->fuel_type == 'diesel' ? 'selected' : '' }}>Diesel</option>
+                    <label for="fuel_type">Tipo de Combustível</label>
+                    <select id="fuel_type" name="fuel_type" class="select mt-1 w-full cursor-pointer">
+                        <option value="" disabled>Selecione</option>
+                        <option value="gasoline"
+                            {{ old('fuel_type', $vehicle->fuel_type) == 'gasoline' ? 'selected' : '' }}>Gasolina</option>
+                        <option value="alcohol" {{ old('fuel_type', $vehicle->fuel_type) == 'alcohol' ? 'selected' : '' }}>
+                            Álcool</option>
+                        <option value="flex" {{ old('fuel_type', $vehicle->fuel_type) == 'flex' ? 'selected' : '' }}>Flex
+                        </option>
+                        <option value="diesel" {{ old('fuel_type', $vehicle->fuel_type) == 'diesel' ? 'selected' : '' }}>
+                            Diesel</option>
                     </select>
                     @error('fuel_type')
-                        <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                        <div class="text-error mt-1 text-sm font-bold">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div>
-                    <label class="text-gray-700 dark:text-gray-200" for="steering_type">Tipo de Direção</label>
-                    <select id="steering_type" name="steering_type"
-                        class="mt-1 block w-full cursor-pointer rounded-md border border-gray-200 bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:focus:border-blue-300">
-                        <option value="mechanical" {{ $vehicle->steering_type == 'mechanical' ? 'selected' : '' }}>Mecânica
+                    <label for="steering_type">Tipo de Direção</label>
+                    <select id="steering_type" name="steering_type" class="select mt-1 w-full cursor-pointer">
+                        <option value="" disabled>Selecione a direção</option>
+                        <option value="mechanical"
+                            {{ old('steering_type', $vehicle->steering_type) == 'mechanical' ? 'selected' : '' }}>Mecânica
                         </option>
-                        <option value="hydraulic" {{ $vehicle->steering_type == 'hydraulic' ? 'selected' : '' }}>Hidráulica
+                        <option value="hydraulic"
+                            {{ old('steering_type', $vehicle->steering_type) == 'hydraulic' ? 'selected' : '' }}>Hidráulica
                         </option>
-                        <option value="electric" {{ $vehicle->steering_type == 'electric' ? 'selected' : '' }}>Elétrica
+                        <option value="electric"
+                            {{ old('steering_type', $vehicle->steering_type) == 'electric' ? 'selected' : '' }}>Elétrica
                         </option>
                     </select>
                     @error('steering_type')
-                        <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                        <div class="text-error mt-1 text-sm font-bold">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div>
-                    <label class="text-gray-700 dark:text-gray-200" for="transmission">Transmissão</label>
-                    <select id="transmission" name="transmission"
-                        class="mt-1 block w-full cursor-pointer rounded-md border border-gray-200 bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:focus:border-blue-300">
-                        <option value="manual" {{ $vehicle->transmission == 'manual' ? 'selected' : '' }}>Manual</option>
-                        <option value="automatic" {{ $vehicle->transmission == 'automatic' ? 'selected' : '' }}>Automática
+                    <label for="transmission">Transmissão</label>
+                    <select id="transmission" name="transmission" class="select mt-1 w-full cursor-pointer">
+                        <option value="" disabled>Selecione</option>
+                        <option value="manual"
+                            {{ old('transmission', $vehicle->transmission) == 'manual' ? 'selected' : '' }}>Manual</option>
+                        <option value="automatic"
+                            {{ old('transmission', $vehicle->transmission) == 'automatic' ? 'selected' : '' }}>Automática
                         </option>
                     </select>
                     @error('transmission')
-                        <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                        <div class="text-error mt-1 text-sm font-bold">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div>
-                    <label class="text-gray-700 dark:text-gray-200" for="doors">Portas</label>
-                    <input id="doors" name="doors" type="number" min="0" max="5"
-                        value="{{ $vehicle->doors }}"
-                        class="mt-1 block w-full rounded-md border border-gray-200 bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:focus:border-blue-300">
+                    <label for="doors">Portas</label>
+                    <input id="doors" name="doors" type="number" value="{{ old('doors', $vehicle->doors) }}"
+                        class="input mt-1 block w-full">
                     @error('doors')
-                        <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                        <div class="text-error mt-1 text-sm font-bold">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div>
-                    <label class="text-gray-700 dark:text-gray-200" for="year">Ano</label>
-                    <input id="year" name="year" type="text" placeholder="YYYY" value="{{ $vehicle->year }}"
-                        class="mt-1 block w-full rounded-md border border-gray-200 bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:focus:border-blue-300">
+                    <label for="year">Ano</label>
+                    <input id="year" name="year" type="number" value="{{ old('year', $vehicle->year) }}"
+                        class="input mt-1 block w-full">
                     @error('year')
-                        <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                        <div class="text-error mt-1 text-sm font-bold">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div>
-                    <label class="text-gray-700 dark:text-gray-200" for="mileage">Quilometragem Atual</label>
-                    <input id="mileage" name="mileage" type="text" value="{{ $vehicle->mileage }}"
-                        class="mt-1 block w-full rounded-md border border-gray-200 bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:focus:border-blue-300">
+                    <label for="mileage">Quilometragem Atual</label>
+                    <input id="mileage" name="mileage" type="text" value="{{ old('mileage', $vehicle->mileage) }}"
+                        class="input mt-1 block w-full">
                     @error('mileage')
-                        <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                        <div class="text-error mt-1 text-sm font-bold">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div>
-                    <label class="text-gray-700 dark:text-gray-200" for="price">Preço<span class="text-red-700">*</span></label>
-                    <input id="price" name="price" type="number" step="0.01" value="{{ $vehicle->price }}"
-                        class="mt-1 block w-full rounded-md border border-gray-200 bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:focus:border-blue-300">
+                    <label for="price">Preço<span class="text-error">*</span></label>
+                    <label class="input" for="price">
+                        R$
+                        <input id="price" name="price" type="text" value="{{ old('price', $vehicle->price) }}"
+                            class="mt-1 grow">
+                    </label>
                     @error('price')
-                        <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                        <div class="text-error mt-1 text-sm font-bold">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div>
-                    <label class="text-gray-700 dark:text-gray-200" for="license_plate">Placa</label>
-                    <input id="license_plate" name="license_plate" type="text" value="{{ $vehicle->license_plate }}"
-                        class="mt-1 block w-full rounded-md border border-gray-200 bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:focus:border-blue-300">
+                    <label for="license_plate">Placa</label>
+                    <input id="license_plate" name="license_plate" type="text"
+                        value="{{ old('license_plate', $vehicle->license_plate) }}" class="input mt-1 block w-full">
                     @error('license_plate')
-                        <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                        <div class="text-error mt-1 text-sm font-bold">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div>
-                    <label class="text-gray-700 dark:text-gray-200" for="is_active">Ativo<span class="text-red-700">*</span></label>
-                    <select id="is_active" name="is_active"
-                        class="mt-1 block w-full cursor-pointer rounded-md border border-gray-200 bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:focus:border-blue-300">
-                        <option value="1" {{ $vehicle->is_active ? 'selected' : '' }}>Sim</option>
-                        <option value="0" {{ !$vehicle->is_active ? 'selected' : '' }}>Não</option>
+                    <label for="is_active">Ativo</label>
+                    <select id="is_active" name="is_active" class="select mt-1 w-full cursor-pointer">
+                        <option value="1" {{ old('is_active', $vehicle->is_active) == 1 ? 'selected' : '' }}>Sim
+                        </option>
+                        <option value="0" {{ old('is_active', $vehicle->is_active) == 0 ? 'selected' : '' }}>Não
+                        </option>
                     </select>
                     @error('is_active')
-                        <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                        <div class="text-error mt-1 text-sm font-bold">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label class="text-gray-700 dark:text-gray-200" for="description">Descrição</label>
-                    <textarea id="description" name="description" rows="4"
-                        class="mt-1 block w-full rounded-md border border-gray-200 bg-white px-4 py-2 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:focus:border-blue-300">{{ $vehicle->description }}</textarea>
+                    <label for="description">Descrição</label>
+                    <textarea id="description" name="description" class="textarea mt-1 block w-full">{{ old('description', $vehicle->description) }}</textarea>
                     @error('description')
-                        <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                        <div class="text-error mt-1 text-sm font-bold">{{ $message }}</div>
                     @enderror
                 </div>
             </div>
 
             <div class="mt-6 flex justify-end">
-                <button type="submit"
-                    class="transform cursor-pointer rounded-md bg-gray-700 px-8 py-2.5 leading-5 text-white transition-colors duration-300 hover:bg-gray-600 focus:bg-gray-600 focus:outline-none">Salvar</button>
+                <button type="submit" class="btn btn-outline cursor-pointer">Salvar</button>
             </div>
         </form>
-    </section>
+    </fieldset>
 @endsection
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const priceInput = document.getElementById('price');
+
+        priceInput.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            value = (value / 100).toFixed(2);
+            value = value.replace('.', ',');
+            e.target.value = `${value}`;
+        });
+    });
+</script>

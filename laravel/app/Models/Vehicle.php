@@ -44,6 +44,7 @@ class Vehicle extends Model
         if ($image) {
             return asset('storage/' . $image->path);
         }
+        
         $image = $this->images()->first();
         if ($image) {
             return asset('storage/' . $image->path);

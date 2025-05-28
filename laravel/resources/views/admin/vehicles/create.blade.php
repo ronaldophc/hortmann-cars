@@ -129,7 +129,7 @@
                 </div>
 
                 <div>
-                    <label class="" for="images">Imagens</label>
+                    <label for="images">Imagens</label>
                     <input type="file" class="file-input file-input-md file-input-neutral mt-1 block w-full"
                         id="images" name="images[]" multiple/>
                 </div>

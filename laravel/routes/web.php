@@ -16,6 +16,9 @@ Route::get('/teste', function () {
 Route::get('/contact', [PublicController::class, 'contact'])
     ->name('contact');
 
+Route::get('/stock', [PublicController::class, 'stock'])
+    ->name('stock');
+
 Route::get('/login', [AuthController::class, 'login'])
     ->middleware('guest')
     ->name('login');
@@ -42,9 +45,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     Route::resource('images', VehicleImageController::class)
         ->names([
-            'store' => 'admin.images.store',
             'destroy' => 'admin.images.destroy',
             'update' => 'admin.images.update',
         ]);
 
+    Route::post('/vehicles/{vehicle}/images', [VehicleImageController::class, 'store'])
+        ->name('admin.vehicles.images.store');
 });

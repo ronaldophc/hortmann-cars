@@ -95,7 +95,9 @@ class VehicleController extends Controller
         DB::beginTransaction();
 
         try {
-            $vehicle->update($request->validated());
+            $data = $request->validated();
+            $data['price'] = str_replace(',', '.', str_replace('.', '', $data['price']));
+            $vehicle->update($data);
             DB::commit();
             return redirect(route('admin.vehicles.edit', $vehicle->id))
                 ->with('success', 'Veículo atualizado com sucesso!');
