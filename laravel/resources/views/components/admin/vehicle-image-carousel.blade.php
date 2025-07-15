@@ -4,9 +4,7 @@
             <div id="slide{{ $index + 1 }}" class="carousel-item relative flex w-full items-center">
                 <a href="#slide{{ $index === 0 ? count($images) : $index }}" class="btn btn-circle z-10">❮</a>
                 <div class="relative flex w-full flex-col items-center justify-center">
-                    <img alt="Foto do veículo"
-                        class="border-1 mx-2 h-64 w-auto rounded-2xl object-cover object-center md:h-auto md:w-1/2"
-                        src="{{ asset('storage/' . $image->path) }}">
+                    <x-cloudinary::image public-id="{{ $image->path }}" />
                     <div class="mt-2 flex gap-2">
                         @if ($image->is_main)
                             <span class="btn btn-success btn-outline">Capa</span>

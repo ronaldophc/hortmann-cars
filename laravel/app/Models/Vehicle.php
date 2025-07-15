@@ -42,14 +42,14 @@ class Vehicle extends Model
     {
         $image = $this->images()->where('is_main', true)->first();
         if ($image) {
-            return asset('storage/' . $image->path);
+            $image->path;
         }
         
         $image = $this->images()->first();
         if ($image) {
-            return asset('storage/' . $image->path);
+            $image->path;
         }
-        return 'https://placehold.co/600x400?text=Sem+Fotos';
+        return 'car-placeholder_dgpjbf.webp';
     }
 
     public function getOrderedImages()

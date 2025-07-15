@@ -6,10 +6,12 @@ use App\Http\Requests\VehicleStoreRequest;
 use App\Http\Requests\VehicleUpdateRequest;
 use App\Models\Image;
 use App\Models\Vehicle;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class VehicleImageController extends Controller
 {
@@ -36,6 +38,7 @@ class VehicleImageController extends Controller
 
         try {
             $image->delete();
+            Storage::disk('cloudinary')->delete($image->path);
             DB::commit();
             return redirect()->back()->with('success', 'Imagem excluída com sucesso!');
         } catch (\Exception $e) {
@@ -55,7 +58,7 @@ class VehicleImageController extends Controller
         try {
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $imageFile) {
-                    $path = $imageFile->store('vehicles', 'public');
+                    $path = Storage::disk('cloudinary')->put('vehicles', $imageFile);
                     $vehicle->images()->create([
                         'path' => $path,
                         'is_main' => false,
