@@ -14,3 +14,5 @@
 @plugin "daisyui" {
     themes: corporate --default, luxury --prefersdark;
 }
+
+@import '@glidejs/glide/dist/css/glide.core.min.css';

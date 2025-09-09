@@ -42,14 +42,14 @@ class Vehicle extends Model
     {
         $image = $this->images()->where('is_main', true)->first();
         if ($image) {
-            $image->path;
+            return $image->path;
         }
-        
+
         $image = $this->images()->first();
         if ($image) {
-            $image->path;
+            return $image->path;
         }
-        return 'car-placeholder_dgpjbf.webp';
+        return 'placeholder-car.png';
     }
 
     public function getOrderedImages()

@@ -2,7 +2,7 @@
 @section('content')
     <section class="px-3 py-2">
         <div class="flex flex-col items-center justify-center lg:mx-auto lg:flex-row">
-            <div class="mb-2 w-full md:w-1/2 lg:mb-0 lg:w-1/2 lg:pr-3">
+            <div class="mb-2 w-full md:w-1/2 lg:mb-0 lg:w-1/4 lg:pr-3">
                 <h2 class="title-font text-md tracking-widest">{{ $vehicle->manufacturer }}</h2>
                 <h1 class="title-font text-3xl font-medium">{{ $vehicle->model }}</h1>
                 @if (!empty($vehicle->description))
@@ -40,7 +40,9 @@
             @php
                 $images = $vehicle->getOrderedImages() ?? [];
             @endphp
+            <div class="mb-2 w-full md:w-1/2 lg:mb-0 lg:w-1/2 lg:pr-3">
             <x-admin.vehicle-image-carousel :images="$images" />
+            </div>
         </div>
         <div class="mt-6 flex w-full justify-center">
             <form enctype="multipart/form-data" method="POST" 

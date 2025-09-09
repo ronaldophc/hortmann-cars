@@ -8,18 +8,18 @@
                 </svg>
             </div>
             <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                <li><a href="{{ route('admin.vehicles.index') }}">Home</a></li>
-                <li><a href="{{ route('admin.vehicles.create') }}">Criar Veículo</a></li>
-                <li><a target="_blank" href="{{ route('home') }}">Ver Site</a></li>
+                <li><a href="{{ route('admin.vehicles.index') }}" class="text-xl">Home</a></li>
+                <li><a href="{{ route('admin.vehicles.create') }}" class="text-xl">Criar Veículo</a></li>
+                <li><a target="_blank" href="{{ route('home') }}" class="text-xl">Ver Site</a></li>
             </ul>
         </div>
-        <a class="btn btn-ghost flex items-center text-xl" href="{{ route('admin.vehicles.index') }}">
+        <a class="btn btn-ghost flex items-center text-2xl" href="{{ route('admin.vehicles.index') }}">
             <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-10 w-10">
             <span>{{ config('app.name') }}</span>
         </a>
     </div>
     <div class="navbar-center hidden lg:flex">
-        <ul class="menu menu-horizontal px-1">
+        <ul class="menu menu-horizontal px-1 text-xl">
             <li><a href="{{ route('admin.vehicles.index') }}">Home</a></li>
             <li><a href="{{ route('admin.vehicles.create') }}">Criar Veículo</a></li>
             <li><a target="_blank" href="{{ route('home') }}">Ver Site</a></li>
@@ -29,8 +29,8 @@
         <form action="{{ route('admin.logout') }}" method="POST" class="flex items-center">
             @csrf
             <button
-                class="inline-flex cursor-pointer items-center rounded border-0 bg-red-500 px-2 text-base text-black hover:bg-red-600 focus:outline-none md:mt-0">
-                <span class="leading-8">Sair</span>
+                class="inline-flex cursor-pointer items-center rounded border-0 bg-red-500 px-4 text-base text-black hover:bg-red-600 focus:outline-none md:mt-0">
+                <span class="leading-8 text-xl">Sair</span>
             </button>
         </form>
         @include('components.theme-controller')
