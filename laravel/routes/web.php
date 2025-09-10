@@ -13,10 +13,10 @@ Route::get('/teste', function () {
     return view('welcome');
 });
 
-Route::get('/contact', [PublicController::class, 'contact'])
+Route::get('/contato', [PublicController::class, 'contact'])
     ->name('contact');
 
-Route::get('/stock', [PublicController::class, 'stock'])
+Route::get('/estoque', [PublicController::class, 'stock'])
     ->name('stock');
 
 Route::get('/login', [AuthController::class, 'login'])

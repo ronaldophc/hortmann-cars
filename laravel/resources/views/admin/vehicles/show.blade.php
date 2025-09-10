@@ -3,13 +3,12 @@
     <section class="px-3 py-2">
         <div class="flex flex-col items-center justify-center lg:mx-auto lg:flex-row">
             <div class="mb-2 w-full md:w-1/2 lg:mb-0 lg:w-1/4 lg:pr-3">
-                <h2 class="title-font text-md tracking-widest">{{ $vehicle->manufacturer }}</h2>
-                <h1 class="title-font text-3xl font-medium">{{ $vehicle->model }}</h1>
+                <h1 class="title-font text-3xl font-medium">{{ $vehicle->getAttributeFormated('manufacturer') }} {{ $vehicle->getAttributeFormated('model') }}</h1>
                 @if (!empty($vehicle->description))
                     <div class="mb-4 flex">
-                        <a class="flex-grow border-b-2 px-1 py-2 text-lg"></a>
+                        <span class="flex-grow border-b-2 px-1 py-2"></span>
                     </div>
-                    <p class="mb-4 leading-relaxed">{{ $vehicle->description }}</p>
+                    <p class="mb-4 leading-relaxed text-lg">{{ $vehicle->description }}</p>
                 @endif
                 <x-show-car-detail name="Tipo" :value="$vehicle->getAttributeFormated('type')" />
                 <x-show-car-detail name="Tipo de Combustível" :value="$vehicle->getAttributeFormated('fuel_type')" />
@@ -22,9 +21,9 @@
                 <x-show-car-detail name="Ativo" :value="$vehicle->getAttributeFormated('is_active')" />
 
                 <div class="flex items-center justify-between">
-                    <span class="title-font text-info text-xl font-bold lg:text-2xl">R${{ $vehicle->price }}</span>
+                    <span class="title-font text-info text-xl font-bold lg:text-3xl">R${{ $vehicle->price }}</span>
                     <a href="{{ route('admin.vehicles.edit', $vehicle->id) }}"
-                        class="btn btn-sm btn-warning ml-auto">Editar</a>
+                        class="btn btn-sm btn-warning ml-auto text-lg">Editar</a>
                     <button onclick="confirmDelete({{ $vehicle->id }})"
                         class="ml-1 inline-flex cursor-pointer items-center justify-center rounded-full border-0 bg-gray-200 p-0 text-red-500 hover:bg-gray-300 focus:outline-none lg:h-10 lg:w-10">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" stroke-linecap="round"
@@ -41,18 +40,24 @@
                 $images = $vehicle->getOrderedImages() ?? [];
             @endphp
             <div class="mb-2 w-full md:w-1/2 lg:mb-0 lg:w-1/2 lg:pr-3">
-            <x-admin.vehicle-image-carousel :images="$images" />
+                @if (count($images) > 0)
+                    <x-admin.vehicle-image-carousel :images="$images" />
+                @else
+                    <div class="relative flex w-full flex-col items-center justify-center px-8">
+                        <x-cloudinary::image public-id="placeholder-car.png" class="h-52" />
+                    </div>
+                @endif
             </div>
         </div>
         <div class="mt-6 flex w-full justify-center">
-            <form enctype="multipart/form-data" method="POST" 
+            <form enctype="multipart/form-data" method="POST"
                 action="{{ route('admin.vehicles.images.store', $vehicle->id) }}"
                 class="bg-base-200 rounded-box flex w-full max-w-md flex-col gap-4 p-6 shadow-md">
                 @csrf
-                <label class="text-base-content font-semibold" for="images">Adicionar Imagens</label>
+                <label class="text-base-content font-semibold text-xl" for="images">Adicionar Imagens</label>
                 <input type="file" class="file-input file-input-bordered file-input-primary w-full" id="images"
                     name="images[]" multiple />
-                <button type="submit" class="btn btn-primary mt-2 w-full">
+                <button type="submit" class="btn btn-primary mt-2 w-full text-xl">
                     Enviar Imagens
                 </button>
             </form>
@@ -64,6 +69,17 @@
         @method('DELETE')
     </form>
     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const priceSpan = document.querySelector('.title-font.text-info');
+            if (priceSpan) {
+                let value = priceSpan.textContent.replace(/\D/g, '');
+                if (value) {
+                    value = (parseInt(value, 10) / 100).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+                    priceSpan.textContent = `R$${value}`;
+                }
+            }
+        });
+
         function confirmDelete(vehicleId) {
             Swal.fire({
                 title: 'Tem certeza que deseja excluir?',

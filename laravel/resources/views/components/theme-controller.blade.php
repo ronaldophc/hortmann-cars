@@ -14,9 +14,5 @@
 
 <script>
     const theme = localStorage.getItem('theme');
-    if (theme == "luxury") {
-        document.querySelector('.theme-controller').checked = true;
-        return;
-    }
-    document.querySelector('.theme-controller').checked = false;
+    document.querySelector('.theme-controller').checked = theme === "luxury";
 </script>

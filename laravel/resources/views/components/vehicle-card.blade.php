@@ -6,7 +6,7 @@
         <h2 class="card-title text-xl">
             {{ $vehicle->getAttributeFormated('manufacturer') }} {{ $vehicle->getAttributeFormated('model') }}
         </h2>
-        <div>
+        <div class="flex items-center gap-2 h-8">
             @if (!empty($vehicle->year))
                 <div class="badge badge-neutral text-md"> {{ $vehicle->getAttributeFormated('year') }}</div>
             @endif

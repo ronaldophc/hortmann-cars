@@ -16,9 +16,7 @@ class VehicleController extends Controller
     public function index(Request $request)
     {
         $query = Vehicle::query();
-        $user = Auth::user();
-        $query->where('user_id', $user->id);
-        
+
         if ($request->filled('type')) {
             $query->where('type', $request->type);
         }
@@ -48,10 +46,10 @@ class VehicleController extends Controller
     {
         DB::beginTransaction();
         $user = Auth::user();
-        
+
         try {
             $data = $request->validated();
-            
+
             $data['user_id'] = $user->id;
             $data['price'] = str_replace(',', '.', str_replace('.', '', $data['price']));
             $vehicle = Vehicle::create($data);

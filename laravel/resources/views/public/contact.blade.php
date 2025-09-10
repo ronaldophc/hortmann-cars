@@ -3,25 +3,25 @@
     <section class="hero min-h-screen">
         <div class="hero-content w-full flex-col">
             <h1 class="text-center text-5xl font-bold">Contato</h1>
-            <p class="text-base-content/70 mt-2 text-center text-lg">Fale conosco ou venha nos visitar!</p>
+            <p class="text-base-content/70 mt-2 text-center text-xl">Fale conosco ou venha nos visitar!</p>
 
             <div class="mt-10 grid w-full grid-cols-1 gap-12 lg:grid-cols-3">
                 <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-1">
                     <div class="card bg-base-100 p-4 shadow-md">
-                        <span class="bg-accent inline-block rounded-full p-3">
+                        <span class="bg-accent rounded-full p-3 flex flex-row gap-2 items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="h-5 w-5">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
                             </svg>
+                            <span class="text-xl font-bold">Email</span>
                         </span>
-                        <h2 class="text-primary mt-4 font-bold">Email</h2>
-                        <p class="text-primary mt-2 text-sm">Entre em contato via email.</p>
-                        <p class="mt-2 text-sm">camposr@utfpr.alunos.edu.br</p>
+                        <p class="text-primary mt-2 text-lg">Entre em contato via email.</p>
+                        <p class="mt-2 text-lg">camposr@utfpr.alunos.edu.br</p>
                     </div>
 
                     <div class="card bg-base-100 p-4 shadow-md">
-                        <span class="bg-accent inline-block rounded-full p-3">
+                        <span class="bg-accent rounded-full p-3 flex flex-row gap-2 items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="h-5 w-5">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -29,24 +29,25 @@
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                             </svg>
+                            <span class="text-xl font-bold">Localização</span>
                         </span>
                         <h2 class="text-primary mt-4 font-bold">UTFPR</h2>
-                        <p class="text-primary mt-2 text-sm">Venha visitar a UTFPR.</p>
-                        <p class="mt-2 text-sm">Av. Profa. Laura Pacheco Bastos, 800 - Industrial, Guarapuava - PR,
+                        <p class="text-primary mt-2 text-lg">Venha visitar a UTFPR.</p>
+                        <p class="mt-2 text-lg">Av. Profa. Laura Pacheco Bastos, 800 - Industrial, Guarapuava - PR,
                             85053-525</p>
                     </div>
 
                     <div class="card bg-base-100 p-4 shadow-md">
-                        <span class="bg-accent inline-block rounded-full p-3">
+                        <span class="bg-accent rounded-full p-3 flex flex-row gap-2 items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="h-5 w-5">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
                             </svg>
+                            <span class="text-xl font-bold">Telefones</span>
                         </span>
-                        <h2 class="text-primary mt-4 font-bold">Telefones</h2>
-                        <p class="mt-2 text-sm">(42) 99999-9999</p>
-                        <p class="mt-2 text-sm">(42) 99999-9999</p>
+                        <p class="mt-2 text-lg">(42) 99999-9999</p>
+                        <p class="mt-2 text-lg">(42) 99999-9999</p>
                     </div>
                 </div>
 

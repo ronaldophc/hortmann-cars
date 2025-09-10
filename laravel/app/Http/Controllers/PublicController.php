@@ -41,7 +41,7 @@ class PublicController extends Controller
 
     public function stock(Request $request)
     {
-        $query = Vehicle::where('is_active', true);
+        $query = Vehicle::query();
 
         if ($request->filled('type')) {
             $query->where('type', $request->type);
@@ -50,14 +50,13 @@ class PublicController extends Controller
         if ($request->filled('sort')) {
             if ($request->sort == 'price_asc') {
                 $query->orderBy('price', 'asc');
-            } elseif ($request->sort == 'price_desc') {
+            }
+            if ($request->sort == 'price_desc') {
                 $query->orderBy('price', 'desc');
             }
-        } else {
-            $query->latest();
         }
 
-        $vehicles = $query->paginate(10);
+        $vehicles = $query->paginate(5);
 
         return view('public.stock', compact('vehicles'));
     }
