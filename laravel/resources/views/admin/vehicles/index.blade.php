@@ -2,8 +2,9 @@
 @section('content')
     <section class="pt-4 text-xl">
         <div class="mx-auto w-full max-w-7xl px-4 md:px-8">
-            <form action="{{ route('admin.vehicles.index') }}" method="GET" >
+            <form action="{{ route('admin.vehicles.index') }}" method="GET">
                 <div class="flex flex-wrap justify-between gap-4">
+                
                     <select name="type" class="select select-primary text-xl">
                         <option value="">Todos os Tipos</option>
                         <option value="car" {{ request('type') == 'car' ? 'selected' : '' }}>Carro</option>
@@ -17,10 +18,12 @@
                                 para Maior)</option>
                             <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>Preço (Maior
                                 para Menor)</option>
+                            <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }}>Mais recentes
+                            </option>
+                            <option value="oldest" {{ request('sort') == 'oldest' ? 'selected' : '' }}>Mais antigos</option>
                         </select>
 
-                        <button type="submit"
-                            class="btn btn-accent text-xl">
+                        <button type="submit" class="btn btn-accent text-xl">
                             Filtrar
                         </button>
                     </div>

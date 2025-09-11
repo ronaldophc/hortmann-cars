@@ -54,6 +54,23 @@ class PublicController extends Controller
             if ($request->sort == 'price_desc') {
                 $query->orderBy('price', 'desc');
             }
+            if ($request->sort == 'newest') {
+                $query->orderBy('created_at', 'desc');
+            }
+            if ($request->sort == 'oldest') {
+                $query->orderBy('created_at', 'asc');
+            }
+        }
+
+        $search = $request->input('search');
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('manufacturer', 'like', "%{$search}%")
+                  ->orWhere('model', 'like', "%{$search}%")
+                  ->orWhere('year', 'like', "%{$search}%")
+                  ->orWhere('description', 'like', "%{$search}%")
+                  ->orWhere('price', 'like', "%{$search}%");
+            });
         }
 
         $vehicles = $query->paginate(5);
