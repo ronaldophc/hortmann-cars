@@ -1,4 +1,7 @@
-<a class="card bg-base-200 w-80 shadow-sm" href="{{ route('admin.vehicles.show', $vehicle->id) }}">
+<?php
+$route = $isAdmin ? 'admin.vehicles.show' : 'vehicles.show';
+?>
+<a class="card bg-base-200 w-80 shadow-sm" href="{{ route($route, $vehicle->id) }}">
     <figure class="h-52 w-full">
         <x-cloudinary::image public-id="{{ $vehicle->getMainImage() }}" />
     </figure>

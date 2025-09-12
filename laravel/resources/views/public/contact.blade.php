@@ -17,7 +17,7 @@
                             <span class="text-xl font-bold">Email</span>
                         </span>
                         <p class="text-primary mt-2 text-lg">Entre em contato via email.</p>
-                        <p class="mt-2 text-lg">camposr@utfpr.alunos.edu.br</p>
+                        <p class="mt-2 text-lg">{{ $settings->email }}</p>
                     </div>
 
                     <div class="card bg-base-100 p-4 shadow-md">
@@ -31,10 +31,8 @@
                             </svg>
                             <span class="text-xl font-bold">Localização</span>
                         </span>
-                        <h2 class="text-primary mt-4 font-bold">UTFPR</h2>
-                        <p class="text-primary mt-2 text-lg">Venha visitar a UTFPR.</p>
-                        <p class="mt-2 text-lg">Av. Profa. Laura Pacheco Bastos, 800 - Industrial, Guarapuava - PR,
-                            85053-525</p>
+                        <p class="text-primary mt-2 text-lg">Venha nos visitar.</p>
+                        <p class="mt-2 text-lg">{{ $settings->address }}</p>
                     </div>
 
                     <div class="card bg-base-100 p-4 shadow-md">
@@ -46,15 +44,13 @@
                             </svg>
                             <span class="text-xl font-bold">Telefones</span>
                         </span>
-                        <p class="mt-2 text-lg">(42) 99999-9999</p>
-                        <p class="mt-2 text-lg">(42) 99999-9999</p>
+                        <p class="mt-2 text-lg">{{ $settings->phone_1 }}</p>
+                        <p class="mt-2 text-lg">{{ $settings->phone_2 }}</p>
                     </div>
                 </div>
 
                 <div class="h-96 overflow-hidden rounded-lg lg:col-span-2 lg:h-auto">
-                    <iframe width="100%" height="100%" frameborder="0" title="map" marginheight="0" marginwidth="0"
-                        scrolling="no"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3605.6145522682023!2d-51.4797471!3d-25.3507121!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ef37d3a2013a7f%3A0x167e4bb18692475a!2sUniversidade%20Tecnol%C3%B3gica%20Federal%20do%20Paran%C3%A1%20-%20Campus%20Guarapuava!5e0!3m2!1spt-BR!2sbr!4v1744918673750!5m2!1spt-BR!2sbr"></iframe>
+                    <?= $settings->google_maps_embed ?>
                 </div>
             </div>
         </div>

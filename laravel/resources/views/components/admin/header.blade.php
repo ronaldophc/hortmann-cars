@@ -10,6 +10,7 @@
             <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                 <li><a href="{{ route('admin.vehicles.index') }}" class="text-xl">Home</a></li>
                 <li><a href="{{ route('admin.vehicles.create') }}" class="text-xl">Criar Veículo</a></li>
+                <li><a href="{{ route('admin.settings') }}" class="text-xl">Configurações</a></li>
                 <li><a target="_blank" href="{{ route('home') }}" class="text-xl">Ver Site</a></li>
             </ul>
         </div>
@@ -22,10 +23,12 @@
         <ul class="menu menu-horizontal px-1 text-xl">
             <li><a href="{{ route('admin.vehicles.index') }}">Home</a></li>
             <li><a href="{{ route('admin.vehicles.create') }}">Criar Veículo</a></li>
+            <li><a href="{{ route('admin.settings') }}">Configurações</a></li>
             <li><a target="_blank" href="{{ route('home') }}">Ver Site</a></li>
         </ul>
     </div>
-    <div class="navbar-end gap-1">
+    <div class="navbar-end gap-2">
+        @include('components.theme-controller')
         <form action="{{ route('admin.logout') }}" method="POST" class="flex items-center">
             @csrf
             <button
@@ -33,6 +36,5 @@
                 <span class="leading-8 text-xl">Sair</span>
             </button>
         </form>
-        @include('components.theme-controller')
     </div>
 </div>
