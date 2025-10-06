@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PublicController;
@@ -10,12 +9,6 @@ use App\Http\Controllers\VehicleImageController;
 
 Route::get('/', [PublicController::class, 'index'])
     ->name('home');
-
-Route::get('/teste', function () {
-    $connectionName = 'laravel3';
-
-
-});
 
 Route::get('/contato', [PublicController::class, 'contact'])
     ->name('contact');

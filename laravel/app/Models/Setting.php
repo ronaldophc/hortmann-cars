@@ -19,20 +19,20 @@ class Setting extends Model
         // Logo da Loja
         'logo',
         'logo_alt',
-        
+
         // Informações de Contato
         'phone_1',
         'phone_2',
         'email',
         'address',
         'opening_hours',
-        
+
         // Redes Sociais
         'instagram_url',
         'facebook_url',
         'linkedin_url',
         'x_url',
-        
+
         // Localização
         'google_maps_url',
         'google_maps_embed',
@@ -47,16 +47,6 @@ class Setting extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
-    
-
-    /**
-     * Get the singleton instance of settings.
-     * Since we only need one settings record.
-     */
-    public static function getSettings()
-    {
-        return static::first() ?? new static();
-    }
 
     /**
      * Update or create settings.
@@ -64,13 +54,13 @@ class Setting extends Model
     public static function updateSettings(array $data)
     {
         $settings = static::first();
-        
+
         if ($settings) {
             $settings->update($data);
         } else {
             $settings = static::create($data);
         }
-        
+
         return $settings;
     }
 
@@ -112,15 +102,15 @@ class Setting extends Model
     private function formatPhone($phone)
     {
         if (!$phone) return null;
-        
+
         $phone = preg_replace('/\D/', '', $phone);
-        
+
         if (strlen($phone) === 11) {
             return '(' . substr($phone, 0, 2) . ') ' . substr($phone, 2, 5) . '-' . substr($phone, 7);
         } elseif (strlen($phone) === 10) {
             return '(' . substr($phone, 0, 2) . ') ' . substr($phone, 2, 4) . '-' . substr($phone, 6);
         }
-        
+
         return $phone;
     }
 

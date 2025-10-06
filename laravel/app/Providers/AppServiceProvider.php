@@ -37,11 +37,11 @@ class AppServiceProvider extends ServiceProvider
         Config::set("database.connections.{$connectionName}", array(
             'driver' => 'mysql',
             'url' => env('DB_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
+            'host' => 'database',
+            'port' => '3306',
             'database' => $connectionName,
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', ''),
+            'username' => 'root',
+            'password' => 'secret',
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => env('DB_CHARSET', 'utf8mb4'),
             'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
@@ -56,7 +56,7 @@ class AppServiceProvider extends ServiceProvider
 
         Config::set('database.default', $connectionName);
 
-        Artisan::call('migrate', array('--database' => $connectionName, '--force' => true));
+
 
 
         View::composer('*', SettingsComposer::class);

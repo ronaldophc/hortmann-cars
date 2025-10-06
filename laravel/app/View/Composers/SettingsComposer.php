@@ -12,6 +12,6 @@ class SettingsComposer
      */
     public function compose(View $view): void
     {
-        $view->with('settings', Setting::getSettings());
+        $view->with('settings', Setting::query()->first());
     }
 }
