@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PublicController;
@@ -11,7 +12,9 @@ Route::get('/', [PublicController::class, 'index'])
     ->name('home');
 
 Route::get('/teste', function () {
-    return view('welcome');
+    $connectionName = 'laravel3';
+
+
 });
 
 Route::get('/contato', [PublicController::class, 'contact'])
