@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Settings\Customer;
+use App\Services\DatabaseService;
 use App\View\Composers\SettingsComposer;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\URL;
@@ -30,34 +31,17 @@ class AppServiceProvider extends ServiceProvider
         }
 
         $baseUrl = URL::to('/');
-        Log::info('Base URL: ' . $baseUrl);
+        $host = request()->getHttpHost();
+        $partialsUrl = explode('.', $host);
 
-        $connectionName = 'laravel3';
+        $customer = Customer::query()
+            ->where('domain', $baseUrl)
+            ->first();
 
-        Config::set("database.connections.{$connectionName}", array(
-            'driver' => 'mysql',
-            'url' => env('DB_URL'),
-            'host' => 'database',
-            'port' => '3306',
-            'database' => $connectionName,
-            'username' => 'root',
-            'password' => 'secret',
-            'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => env('DB_CHARSET', 'utf8mb4'),
-            'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'strict' => true,
-            'engine' => null,
-            'options' => extension_loaded('pdo_mysql') ? array_filter([
-                \PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
-            ]) : [],
-        ));
-
-        Config::set('database.default', $connectionName);
-
-
-
+        if (!is_null($customer)) {
+            $databaseService = new DatabaseService($customer);
+            $databaseService->addConnection()->setAsDefault();
+        }
 
         View::composer('*', SettingsComposer::class);
     }

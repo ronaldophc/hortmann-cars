@@ -11,6 +11,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
         then: function () {
             Route::prefix('settings')
+                ->middleware('web')
                 ->name('settings.')
                 ->group(base_path('routes/settings.php'));
         },

@@ -1,0 +1,53 @@
+<?php
+
+namespace App\Services;
+
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
+use PDO;
+
+class DatabaseService
+{
+    private $customer;
+
+    public function __construct($customer)
+    {
+        $this->customer = $customer;
+    }
+
+    public function addConnection()
+    {
+        Config::set("database.connections.{$this->customer->name}", array(
+            'driver' => 'mysql',
+            'url' => env('DB_URL'),
+            'host' => 'database',
+            'port' => '3306',
+            'database' => $this->customer->name,
+            'username' => 'root',
+            'password' => 'secret',
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => env('DB_CHARSET', 'utf8mb4'),
+            'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ));
+
+        return $this;
+    }
+
+    public function configureDatabase()
+    {
+        Artisan::call('migrate', array('--database' => $this->customer->name, '--force' => true));
+        Artisan::call('db:seed', array('--database' => $this->customer->name, '--force' => true));
+    }
+
+    public function setAsDefault()
+    {
+        Config::set('database.default', $this->customer->name);
+    }
+}
