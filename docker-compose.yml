@@ -37,7 +37,7 @@ services:
       - hortmann-cars
 
   # db mysql
-  database:
+  laravel-database:
     image: mysql:8.0
     platform: linux/x86_64
     restart: always
@@ -59,7 +59,7 @@ services:
     ports:
       - "8081:80"
     environment:
-      PMA_HOST: database
+      PMA_HOST: laravel-database
       PMA_PORT: 3306
       MYSQL_ROOT_PASSWORD: secret
     networks:
