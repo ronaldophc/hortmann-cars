@@ -77,4 +77,9 @@ class PublicController extends Controller
 
         return view('public.stock', compact('vehicles'));
     }
+
+    public function showVehicle(Vehicle $vehicle)
+    {
+        return view('public.vehicle', compact('vehicle'));
+    }
 }

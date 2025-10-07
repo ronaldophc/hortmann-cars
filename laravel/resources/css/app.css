@@ -1,4 +1,6 @@
 @import 'tailwindcss';
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+@import '@glidejs/glide/dist/css/glide.core.min.css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -14,4 +16,3 @@
     themes: corporate --default, luxury --prefersdark;
 }
 
-@import '@glidejs/glide/dist/css/glide.core.min.css';
