@@ -22,6 +22,14 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>{{ config('app.name') }}</title>
 
+    @php
+        $customer = \App\Models\Settings\Customer::query()->where('id', session('customer_id'))->first();
+    @endphp
     @vite('resources/js/app.js')
-    @vite('resources/css/app.css')
+    @if($customer)
+        @vite("resources/css/{$customer->connection_name}/app.css")
+    @else
+        @vite('resources/css/app.css')
+    @endif
+
 </head>

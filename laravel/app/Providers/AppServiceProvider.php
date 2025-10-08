@@ -37,8 +37,9 @@ class AppServiceProvider extends ServiceProvider
         $customer = Customer::query()
             ->where('domain', $baseUrl)
             ->first();
-
         if (!is_null($customer)) {
+            session()->put('customer_id', optional($customer)->id);
+            config(['app.name' => $customer->name]);
             $databaseService = new DatabaseService($customer);
             $databaseService->addConnection()->setAsDefault();
         }
