@@ -11,7 +11,7 @@
                 </a>
                 <form method="POST" action="{{ route('settings.logout') }}">
                     @csrf
-                    <button type="submit" class="btn btn-error btn-sm flex items-center gap-2">
+                    <button type="submit" class="btn btn-error flex items-center gap-2">
                         <i class="fa fa-sign-out-alt"></i>
                         Sair
                     </button>
@@ -32,8 +32,22 @@
                             <span class="badge badge-info badge-outline">{{ $customer->active }}</span>
                             <form method="POST" action="{{ route('settings.customers.migrate', $customer->id) }}">
                                 @csrf
-                                <button type="submit" class="btn btn-sm btn-accent" title="Rodar migration e seeder">
-                                    <i class="fa fa-database"></i>
+                                <button type="submit" class="btn btn-sm btn-accent" title="Rodar migrations"
+                                        @if(!$customer->hasPendingMigrations) disabled @endif>
+                                    <i class="fa fa-database"></i>Rodar migrations
+                                </button>
+                            </form>
+                            <form method="POST" action="{{ route('settings.customers.seed', $customer->id) }}">
+                                @csrf
+                                <button type="submit" class="btn btn-sm btn-accent" title="Rodar seeders"
+                                        @if($customer->migrated) disabled @endif>
+                                    <i class="fa fa-server"></i>Rodar seeders
+                                </button>
+                            </form>
+                            <form method="POST" action="{{ route('settings.customers.refresh', $customer->id) }}">
+                                @csrf
+                                <button type="submit" class="btn btn-sm btn-accent" title="Rodar seeders">
+                                    <i class="fa fa-server"></i>Refresh
                                 </button>
                             </form>
                         </div>

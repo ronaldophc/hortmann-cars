@@ -19,4 +19,8 @@ Route::middleware([SettingsNotAuthenticated::class])->group(function () {
     })->name('home');
     Route::resource('customers', CustomerController::class);
     Route::post('customers/{id}/migrate', [CustomerController::class, 'migrate'])->name('customers.migrate');
+    Route::post('customers/{id}/refresh', [CustomerController::class, 'refresh'])->name('customers.refresh');
+    Route::post('customers/{id}/seed', [CustomerController::class, 'seed'])->name('customers.seed');
+
+    Route::get('settings/refresh', [CustomerController::class, 'refreshSettings'])->name('settings.refresh');
 });

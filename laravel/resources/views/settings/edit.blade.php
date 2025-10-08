@@ -48,6 +48,10 @@
                     @enderror
                 </div>
 
+                @include('components.settings.subdomains', [
+                    'subdomains' => old('subdomains', $customer->subdomains ?? [''])
+                ])
+
                 <div class="flex justify-end">
                     <a href="{{ route('settings.customers.index') }}" class="btn btn-ghost mr-2">Cancelar</a>
                     <button type="submit" class="btn btn-primary">Salvar</button>

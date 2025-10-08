@@ -6,27 +6,20 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::connection('settings')->create('customers', function (Blueprint $table) {
+        Schema::connection('settings')->create('sub_domains', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade');
+            $table->string('subdomain');
             $table->boolean('active')->default(1);
-            $table->string('domain');
             $table->string('connection_name')->nullable();
             $table->timestamps();
         });
-
     }
-
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::connection('settings')->dropIfExists('customers');
+        Schema::connection('settings')->dropIfExists('sub_domains');
     }
 };

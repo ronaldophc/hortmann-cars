@@ -19,4 +19,6 @@ class UserSeeder extends Seeder
             'password' => bcrypt('123'), // Use a secure password in production
         ]);
     }
+
+    // php artisan db:seed --database=settings --class=Database\\Seeders\\settings\\UserSeeder
 }

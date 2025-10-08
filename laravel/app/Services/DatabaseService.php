@@ -20,7 +20,7 @@ class DatabaseService
         Config::set("database.connections.{$this->customer->name}", array(
             'driver' => 'mysql',
             'url' => env('DB_URL'),
-            'host' => 'database',
+            'host' => 'laravel-database',
             'port' => '3306',
             'database' => $this->customer->name,
             'username' => 'root',
@@ -40,14 +40,32 @@ class DatabaseService
         return $this;
     }
 
-    public function configureDatabase()
+    public function runMigrations()
     {
         Artisan::call('migrate', array('--database' => $this->customer->name, '--force' => true));
+    }
+
+    public function runSeeders()
+    {
         Artisan::call('db:seed', array('--database' => $this->customer->name, '--force' => true));
+    }
+
+    public function refreshDatabase()
+    {
+        Artisan::call('migrate:refresh', array('--database' => $this->customer->name, '--force' => true));
+        return $this;
+    }
+
+    public function configureDatabase()
+    {
+        $this->runMigrations();
+        $this->runSeeders();
+        return $this;
     }
 
     public function setAsDefault()
     {
         Config::set('database.default', $this->customer->name);
+        return $this;
     }
 }
