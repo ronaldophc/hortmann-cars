@@ -26,12 +26,12 @@ class CustomerController extends Controller
             $databaseService->addConnection();
             $customer->active = $customer->active ? 'Ativo' : 'Desativado';
 
-            if (!Schema::connection($customer->name)->hasTable('migrations')) {
+            if (!Schema::connection($customer->connection_name)->hasTable('migrations')) {
                 $customer->hasPendingMigrations = true;
                 continue;
             }
 
-            $ranMigrations = DB::connection($customer->name)
+            $ranMigrations = DB::connection($customer->connection_name)
                 ->table('migrations')
                 ->pluck('migration');
             $pending = $migrationFiles->diff($ranMigrations);
@@ -116,7 +116,7 @@ class CustomerController extends Controller
                 ]);
             }
 
-            DB::statement("CREATE DATABASE `{$data['name']}`");
+            DB::statement("CREATE DATABASE `{$customer->connection_name}`");
             $databaseService = new DatabaseService($customer);
             $databaseService->addConnection()->setAsDefault()->configureDatabase();
             DB::commit();
@@ -126,5 +126,39 @@ class CustomerController extends Controller
             return back()->withErrors([$e->getMessage()])->withInput();
         }
 
+    }
+
+    public function update(Request $request, Customer $customer)
+    {
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'domain' => 'required|string|max:255|unique:settings.customers,domain,' . $customer->id,
+        ]);
+
+        $customer->update([
+            'name' => $data['name'],
+            'domain' => $data['domain'],
+            'active' => $request->input('active', 1),
+        ]);
+
+        return redirect()->route('settings.customers.index')->with('success', 'Empresa atualizada com sucesso!');
+    }
+
+    public function destroy(Request $request, Customer $customer)
+    {
+        try {
+            DB::beginTransaction();
+            DB::connection('settings')->getPdo();
+
+            DB::statement("DROP DATABASE IF EXISTS `{$customer->name}`");
+            $customer->delete();
+
+            DB::commit();
+            return redirect()->route('settings.customers.index')->with('success', 'Empresa deletada com sucesso!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error("Error deleting customer: " . $e->getMessage());
+            return back()->withErrors(['error' => 'Erro ao deletar a empresa.'])->withInput();
+        }
     }
 }

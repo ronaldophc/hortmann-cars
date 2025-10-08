@@ -30,6 +30,13 @@
                         </div>
                         <div class="flex items-center gap-2">
                             <span class="badge badge-info badge-outline">{{ $customer->active }}</span>
+                            <form method="POST" action="{{ route('settings.customers.destroy', $customer->id) }}" onsubmit="return confirm('Tem certeza que deseja deletar?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-error" title="Deletar">
+                                    <i class="fa fa-trash"></i> Deletar
+                                </button>
+                            </form>
                             <form method="POST" action="{{ route('settings.customers.migrate', $customer->id) }}">
                                 @csrf
                                 <button type="submit" class="btn btn-sm btn-accent" title="Rodar migrations"
