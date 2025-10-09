@@ -1,7 +1,6 @@
 @extends('layouts.public')
 
 @section('content')
-    <!-- Hero Section com Imagens -->
     <section class="relative bg-gradient-to-r from-base-300 via-base-200 to-base-300">
         <div class="container mx-auto px-5 py-12">
             <div class="flex flex-wrap lg:flex-nowrap">
@@ -9,7 +8,6 @@
                     $images = $vehicle->getOrderedImages() ?? [];
                 @endphp
 
-                    <!-- Galeria de Imagens -->
                 <div class="w-full lg:w-2/3 lg:pr-8">
                     @if (count($images) > 0)
                         <x-public.vehicle-image-carousel :images="$images" class="w-full rounded-lg shadow-2xl" />
@@ -20,7 +18,6 @@
                     @endif
                 </div>
 
-                <!-- Informações Principais -->
                 <div class="w-full lg:w-1/3 mt-8 lg:mt-0">
                     <div class="bg-base-100 rounded-lg shadow-2xl p-8 sticky top-8 border border-base-300">
                         <div class="border-b border-base-300 pb-6 mb-6">
@@ -47,18 +44,14 @@
 
                         <!-- Botões de Ação -->
                         <div class="space-y-3 mb-6">
-                            <a href="#" class="btn btn-success w-full text-lg">
+                            <a target="_blank" href="https://wa.me/{{ $settings->phone }}?text={{ $settings->whatsapp_default_message }}" class="btn btn-success w-full text-lg">
                                 <i class="fab fa-whatsapp mr-2 text-xl"></i>
                                 WhatsApp
                             </a>
-                            <a href="#" class="btn btn-primary w-full">
+                            <a href="tel:{{ $settings->phone_2 }}" class="btn btn-primary w-full">
                                 <i class="fas fa-phone mr-2"></i>
                                 Ligar Agora
                             </a>
-                            <button class="btn btn-outline w-full">
-                                <i class="fas fa-heart mr-2"></i>
-                                Favoritar
-                            </button>
                         </div>
 
                         <!-- Badges de Destaque -->
@@ -125,7 +118,7 @@
                         <div class="flex items-center">
                             <div class="flex-shrink-0 mr-4">
                                 <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center">
-                                    <i class="fas fa-steering-wheel text-secondary-content text-xl"></i>
+                                    <i class="fas fa-car-side text-secondary-content text-xl"></i>
                                 </div>
                             </div>
                             <div>
@@ -193,7 +186,7 @@
         <section class="py-16 bg-base-100">
             <div class="container mx-auto px-5">
                 <div class="max-w-4xl mx-auto">
-                    <h2 class="text-3xl font-bold text-center mb-8 text-base-content">Sobre este Veículo</h2>
+                    <h2 class="text-3xl font-bold text-center mb-8 text-base-content">Informações</h2>
                     <div class="card bg-base-200 shadow-xl">
                         <div class="card-body">
                             <p class="text-base-content leading-relaxed text-lg">{{ $vehicle->description }}</p>

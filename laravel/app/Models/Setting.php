@@ -26,6 +26,7 @@ class Setting extends Model
         'email',
         'address',
         'opening_hours',
+        'whatsapp_default_message',
 
         // Redes Sociais
         'instagram_url',
@@ -51,17 +52,12 @@ class Setting extends Model
     /**
      * Update or create settings.
      */
-    public static function updateSettings(array $data)
+    public static function updateSettings(Setting $setting)
     {
-        $settings = static::first();
-
-        if ($settings) {
-            $settings->update($data);
-        } else {
-            $settings = static::create($data);
+        if ($setting) {
+            return $setting->update();
         }
-
-        return $settings;
+        return static::create($setting->toArray());
     }
 
     /**

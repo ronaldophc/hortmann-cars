@@ -1,6 +1,3 @@
-import { themeChange } from "theme-change";
-themeChange();
-
 import Glide from "@glidejs/glide";
 document.addEventListener('DOMContentLoaded', function () {
     var glide = document.querySelector('.glide');

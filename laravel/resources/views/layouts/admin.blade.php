@@ -9,6 +9,9 @@
 
     @yield('content')
 
+    @include('components.myfooter-slim')
+
+
     @if (session('success'))
         <script>
             Swal.fire({

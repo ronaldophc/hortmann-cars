@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-    <fieldset class="fieldset bg-base-200 border-base-300 rounded-box mx-auto border p-4 text-lg">
+    <fieldset class="fieldset bg-base-200 border-base-300 rounded-box mx-auto border p-4 text-lg mb-2">
         <legend class="fieldset-legend text-xl">Configurações da Loja</legend>
 
         <form action="{{ route('admin.settings.update') }}" method="POST" enctype="multipart/form-data">
@@ -10,7 +10,7 @@
             <div class="mb-6">
                 <h3 class="text-xl font-semibold mb-4 border-b border-base-300 pb-2">Logo da Loja</h3>
                 <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                    
+
                     <div>
                         <label for="logo">Logo Principal<span class="text-error">*</span></label>
                         <input id="logo" name="logo" type="file" accept="image/png,image/jpeg,image/jpg,image/svg+xml"
@@ -28,12 +28,12 @@
                         @if(isset($settings->logo) && $settings->logo)
                             <div class="relative">
                                 <div class="bg-white border-2 border-gray-200 rounded-lg p-4 flex items-center justify-center h-32">
-                                    <img src="{{ asset('storage/' . $settings->logo) }}" 
-                                         alt="Logo da loja" 
-                                         class="max-h-24 max-w-full object-contain">
+                                    <x-cloudinary::image public-id="{{ $settings->logo }}"
+                                         alt="Logo da loja"
+                                         class="max-h-24 max-w-full object-contain"/>
                                 </div>
-                                <button type="button" 
-                                        onclick="removeLogo()" 
+                                <button type="button"
+                                        onclick="removeLogo()"
                                         class="absolute -top-2 -right-2 btn btn-circle btn-sm btn-error">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -70,12 +70,12 @@
                         @if(isset($settings->logo_alt) && $settings->logo_alt)
                             <div class="relative">
                                 <div class="bg-gray-800 border-2 border-gray-200 rounded-lg p-4 flex items-center justify-center h-32">
-                                    <img src="{{ asset('storage/' . $settings->logo_alt) }}" 
-                                         alt="Logo alternativa da loja" 
-                                         class="max-h-24 max-w-full object-contain">
+                                    <x-cloudinary::image public-id="{{ $settings->logo_alt }}"
+                                         alt="Logo alternativa da loja"
+                                         class="max-h-24 max-w-full object-contain"/>
                                 </div>
-                                <button type="button" 
-                                        onclick="removeLogoAlt()" 
+                                <button type="button"
+                                        onclick="removeLogoAlt()"
                                         class="absolute -top-2 -right-2 btn btn-circle btn-sm btn-error">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -99,9 +99,9 @@
             <div class="mb-6">
                 <h3 class="text-xl font-semibold mb-4 border-b border-base-300 pb-2">Informações de Contato</h3>
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-                    
+
                     <div>
-                        <label for="phone_1">Telefone Principal<span class="text-error">*</span></label>
+                        <label for="phone_1">Telefone WhatsApp<span class="text-error">*</span></label>
                         <input id="phone_1" name="phone_1" type="tel" value="{{ $settings->phone_1 ?? old('phone_1') }}"
                             placeholder="(00) 00000-0000"
                             class="input mt-1 block w-full text-lg" required>
@@ -111,7 +111,7 @@
                     </div>
 
                     <div>
-                        <label for="phone_2">Telefone Secundário</label>
+                        <label for="phone_2">Telefone Ligação</label>
                         <input id="phone_2" name="phone_2" type="tel" value="{{ old('phone_2', $settings->phone_2 ?? '') }}"
                             placeholder="(00) 00000-0000"
                             class="input mt-1 block w-full text-lg">
@@ -149,6 +149,20 @@
                             <div class="text-error mt-1 text-sm font-bold">{{ $message }}</div>
                         @enderror
                     </div>
+
+                    <div class="sm:col-span-2">
+                        <label for="whatsapp_default_message" class="font-semibold">Mensagem Padrão do WhatsApp</label>
+                        <textarea id="whatsapp_default_message" name="whatsapp_default_message"
+                                  class="textarea mt-1 block w-full text-lg"
+                                  rows="3"
+                                  placeholder="Olá, gostaria de saber mais sobre este veículo!">{{ old('whatsapp_default_message', $settings->whatsapp_default_message ?? '') }}</textarea>
+                        <div class="text-sm text-gray-500 mt-1">
+                            Esta mensagem será usada como padrão ao iniciar conversa pelo WhatsApp.
+                        </div>
+                        @error('whatsapp_default_message')
+                        <div class="text-error mt-1 text-sm font-bold">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
             </div>
 
@@ -156,7 +170,7 @@
             <div class="mb-6">
                 <h3 class="text-xl font-semibold mb-4 border-b border-base-300 pb-2">Redes Sociais</h3>
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                    
+
                     <div>
                         <label for="instagram_url">Instagram</label>
                         <label class="input mt-1 w-full text-lg flex items-center gap-2">

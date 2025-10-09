@@ -15,7 +15,9 @@
             </ul>
         </div>
         <a class="btn btn-ghost flex items-center text-2xl" href="{{ route('admin.vehicles.index') }}">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-10 w-10">
+            <x-cloudinary::image public-id="{{ $settings->logo }}" alt="Logo" class="h-10 w-10"/>
+
+{{--            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-10 w-10">--}}
             <span>{{ config('app.name') }}</span>
         </a>
     </div>

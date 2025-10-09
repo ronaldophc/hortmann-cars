@@ -23,16 +23,17 @@ class SettingRequest extends FormRequest
     {
         return [
             // Logo (validação de upload será feita no controller)
-            'logo' => 'nullable|string|max:255',
-            'logo_alt' => 'nullable|string|max:255',
-            
+            'logo' => 'nullable|max:255',
+            'logo_alt' => 'nullable|max:255',
+
             // Informações de Contato
             'phone_1' => 'required|string|min:10|max:20',
             'phone_2' => 'nullable|string|min:10|max:20',
             'email' => 'required|email|max:255',
             'address' => 'nullable|string|max:500',
             'opening_hours' => 'nullable|string|max:255',
-            
+            'whatsapp_default_message' => 'nullable|string|max:500',
+
             // Redes Sociais
             'instagram_url' => 'nullable|url|max:255',
             'facebook_url' => 'nullable|url|max:255',
