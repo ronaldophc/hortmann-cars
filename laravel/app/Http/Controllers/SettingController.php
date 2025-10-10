@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SettingRequest;
+use App\Http\Requests\UpdateSettingRequest;
 use App\Models\Setting;
 use Cloudinary\Cloudinary;
 use Illuminate\Support\Facades\Storage;
@@ -22,7 +22,7 @@ class SettingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(SettingRequest $request)
+    public function update(UpdateSettingRequest $request)
     {
         $setting = Setting::first();
 

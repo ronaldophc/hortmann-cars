@@ -19,4 +19,11 @@ class SubDomain extends Model
     {
         return $this->belongsTo(Customer::class);
     }
+
+    public static function generateConnectionName($domainName, $name)
+    {
+        $slug = \Illuminate\Support\Str::slug($name, '_');
+        $formated = preg_replace('/[^a-z0-9_]/', '', strtolower($slug));
+        return "{$domainName}_{$formated}";
+    }
 }

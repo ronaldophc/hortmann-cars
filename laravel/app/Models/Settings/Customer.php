@@ -22,4 +22,10 @@ class Customer extends Model
     {
         return $this->hasMany(SubDomain::class);
     }
+
+    public static function generateConnectionName($name)
+    {
+        $slug = \Illuminate\Support\Str::slug($name, '_');
+        return preg_replace('/[^a-z0-9_]/', '', strtolower($slug));
+    }
 }

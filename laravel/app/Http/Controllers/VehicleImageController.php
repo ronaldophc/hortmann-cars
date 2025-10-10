@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\VehicleStoreRequest;
-use App\Http\Requests\VehicleUpdateRequest;
+use App\Http\Requests\StoreVehicleRequest;
+use App\Http\Requests\UpdateVehicleRequest;
 use App\Models\Image;
 use App\Models\Vehicle;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;

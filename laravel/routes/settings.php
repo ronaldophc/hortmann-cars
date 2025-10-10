@@ -18,6 +18,7 @@ Route::middleware([SettingsNotAuthenticated::class])->group(function () {
         return redirect()->route('settings.customers.index');
     })->name('home');
     Route::resource('customers', CustomerController::class);
+    Route::resource('subdomains', CustomerController::class);
     Route::post('customers/{id}/migrate', [CustomerController::class, 'migrate'])->name('customers.migrate');
     Route::post('customers/{id}/refresh', [CustomerController::class, 'refresh'])->name('customers.refresh');
     Route::post('customers/{id}/seed', [CustomerController::class, 'seed'])->name('customers.seed');

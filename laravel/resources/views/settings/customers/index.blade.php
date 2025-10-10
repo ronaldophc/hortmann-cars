@@ -19,18 +19,20 @@
             </div>
         </div>
 
-        <div class="grid gap-4">
+        <ul class="list list-bordered bg-base-100 rounded-xl shadow bg-base-200 rounded-xl shadow-lg">
             @forelse($customers as $customer)
-                <a class="block rounded-xl border border-base-300 bg-base-100 p-4 shadow hover:bg-base-200 transition" href="{{ route('settings.customers.edit', $customer->id) }}">
-                    <div class="flex items-center justify-between">
+                <li>
+                    <a href="{{ route('settings.customers.edit', $customer->id) }}"
+                       class="flex items-center justify-between px-4 py-3 border-b last:border-b-0">
                         <div>
-                            <h2 class="text-lg font-semibold">{{ $customer->name }}</h2>
+                            <h2 class="font-semibold">{{ $customer->name }}</h2>
                             <p class="text-sm text-base-content/70">Dominio: {{ $customer->domain }}</p>
-                            <p class="text-sm text-base-content/70">Sub Dominio: {{ $customer->subdomain }}</p>
+                            <p class="text-sm text-base-content/70">Sub
+                                Dominios: {{ count($customer->subdomains()->get()) }}</p>
                         </div>
                         <div class="flex items-center gap-2">
                             <span class="badge badge-info badge-outline">{{ $customer->active }}</span>
-                            <form method="POST" action="{{ route('settings.customers.destroy', $customer->id) }}" onsubmit="return confirm('Tem certeza que deseja deletar?');">
+                            <form method="POST" action="{{ route('settings.customers.destroy', $customer->id) }}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-error" title="Deletar">
@@ -58,13 +60,11 @@
                                 </button>
                             </form>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </li>
             @empty
-                <div class="alert alert-info">
-                    Nenhuma empresa cadastrada.
-                </div>
+                <li class="alert alert-info">Nenhuma empresa cadastrada.</li>
             @endforelse
-        </div>
+        </ul>
     </div>
 @endsection

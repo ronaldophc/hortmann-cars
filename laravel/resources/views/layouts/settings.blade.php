@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 
-@include('shared.head')
+@include('shared.settings.head')
 
 <body class="font-sans antialiased min-h-screen flex flex-col">
 

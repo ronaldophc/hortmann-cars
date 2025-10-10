@@ -40,7 +40,8 @@
                 </div>
 
                 @include('components.settings.subdomains', [
-                    'subdomains' => old('subdomains', $customer->subdomains ?? [''])
+                    'subdomains' => old('subdomains', $customer->subdomains ?? ['']),
+                    'edit' => true
                 ])
 
                 <div class="flex justify-end">

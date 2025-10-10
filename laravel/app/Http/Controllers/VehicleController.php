@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\VehicleStoreRequest;
-use App\Http\Requests\VehicleUpdateRequest;
+use App\Http\Requests\StoreVehicleRequest;
+use App\Http\Requests\UpdateVehicleRequest;
 use App\Models\Image;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
@@ -59,7 +59,7 @@ class VehicleController extends Controller
         ]);
     }
 
-    public function store(VehicleStoreRequest $request)
+    public function store(StoreVehicleRequest $request)
     {
         DB::beginTransaction();
         $user = Auth::user();
@@ -105,7 +105,7 @@ class VehicleController extends Controller
         ]);
     }
 
-    public function update(VehicleUpdateRequest $request, Vehicle $vehicle)
+    public function update(UpdateVehicleRequest $request, Vehicle $vehicle)
     {
         DB::beginTransaction();
 
