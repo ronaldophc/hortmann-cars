@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PublicController extends Controller
 {
     public function index(Request $request)
     {
         $query = Vehicle::query();
-
         if ($request->filled('type')) {
             $query->where('type', $request->type);
         }

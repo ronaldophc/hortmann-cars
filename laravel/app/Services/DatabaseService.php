@@ -14,7 +14,7 @@ class DatabaseService
 
     public function __construct($connection_name)
     {
-        $this->$connection_name = $connection_name;
+        $this->connection_name = $connection_name;
     }
 
     public function addConnection()
@@ -44,15 +44,15 @@ class DatabaseService
 
     public function verifyMigrations()
     {
-        $migrator = app('migrator');
-        $migrationFiles = collect($migrator->getMigrationFiles([database_path('migrations')]))
-            ->map(fn($path) => pathinfo($path, PATHINFO_FILENAME));
-
         $this->addConnection();
 
         if (!Schema::connection($this->connection_name)->hasTable('migrations')) {
             return true;
         }
+
+        $migrator = app('migrator');
+        $migrationFiles = collect($migrator->getMigrationFiles([database_path('migrations')]))
+            ->map(fn($path) => pathinfo($path, PATHINFO_FILENAME));
 
         $ranMigrations = DB::connection($this->connection_name)
             ->table('migrations')

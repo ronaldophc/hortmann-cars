@@ -25,7 +25,7 @@
 
                     <div>
                         <label class="block font-semibold mb-2">Logo Atual</label>
-                        @if(isset($settings->logo) && $settings->logo)
+                        @if(!empty($settings->logo))
                             <div class="relative">
                                 <div class="bg-white border-2 border-gray-200 rounded-lg p-4 flex items-center justify-center h-32">
                                     <x-cloudinary::image public-id="{{ $settings->logo }}"
@@ -46,48 +46,6 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                 </svg>
                                 <span class="text-gray-500 text-sm">Nenhuma logo carregada</span>
-                            </div>
-                        @endif
-                    </div>
-                </div>
-
-                <!-- Logo Alternativa (para modo escuro, etc.) -->
-                <div class="grid grid-cols-1 gap-4 md:grid-cols-2 mt-4">
-                    <div>
-                        <label for="logo_alt">Logo Alternativa (opcional)</label>
-                        <input id="logo_alt" name="logo_alt" type="file" accept="image/png,image/jpeg,image/jpg,image/svg+xml"
-                            class="file-input file-input-bordered mt-1 w-full text-lg">
-                        <div class="text-sm text-gray-500 mt-1">
-                            Logo para usar em fundos escuros
-                        </div>
-                        @error('logo_alt')
-                            <div class="text-error mt-1 text-sm font-bold">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <div>
-                        <label class="block font-semibold mb-2">Logo Alternativa Atual</label>
-                        @if(isset($settings->logo_alt) && $settings->logo_alt)
-                            <div class="relative">
-                                <div class="bg-gray-800 border-2 border-gray-200 rounded-lg p-4 flex items-center justify-center h-32">
-                                    <x-cloudinary::image public-id="{{ $settings->logo_alt }}"
-                                         alt="Logo alternativa da loja"
-                                         class="max-h-24 max-w-full object-contain"/>
-                                </div>
-                                <button type="button"
-                                        onclick="removeLogoAlt()"
-                                        class="absolute -top-2 -right-2 btn btn-circle btn-sm btn-error">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                                    </svg>
-                                </button>
-                            </div>
-                        @else
-                            <div class="bg-gray-800 border-2 border-dashed border-gray-600 rounded-lg p-8 flex flex-col items-center justify-center h-32">
-                                <svg class="w-8 h-8 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                </svg>
-                                <span class="text-gray-400 text-sm">Nenhuma logo alternativa</span>
                             </div>
                         @endif
                     </div>

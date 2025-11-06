@@ -28,20 +28,22 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
-        $baseUrl = URL::to('/');
+        $baseUrl = URL::to('/') . '/';
         $host = request()->getHttpHost();
         $partialsUrl = explode(':', $host);
-        if($host == 'localhost:8080') {
+
+        if (request()->is('settings*')) {
             return;
         }
 
         $customer = Customer::query()
             ->where('domain', $baseUrl)
             ->first();
-        if (!is_null($customer)) {
+
+        if (!is_null($customer) && $host != 'localhost:8080') {
             session()->put('connection_name', optional($customer)->connection_name);
             config(['app.name' => $customer->name]);
-            $databaseService = new DatabaseService($customer);
+            $databaseService = new DatabaseService($customer->connection_name);
             $databaseService->addConnection()->setAsDefault();
         }
 

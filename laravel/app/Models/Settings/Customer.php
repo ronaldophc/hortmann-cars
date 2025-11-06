@@ -2,7 +2,6 @@
 
 namespace App\Models\Settings;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
@@ -25,7 +24,7 @@ class Customer extends Model
 
     public static function generateConnectionName($name)
     {
-        $slug = \Illuminate\Support\Str::slug($name, '_');
+        $slug = Str::slug($name, '_');
         return preg_replace('/[^a-z0-9_]/', '', strtolower($slug));
     }
 }

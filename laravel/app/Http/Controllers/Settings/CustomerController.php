@@ -11,13 +11,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Str;
 
 class CustomerController extends Controller
 {
     public function index()
     {
+        DB::connection('settings')->getPdo();
         $customers = Customer::all();
 
         foreach ($customers as $customer) {
@@ -33,7 +32,7 @@ class CustomerController extends Controller
         return view('settings.customers.create');
     }
 
-    public function store(StoreCustomerRequest $request, Customer $customer)
+    public function store(StoreCustomerRequest $request)
     {
         try {
             DB::connection('settings')->getPdo();
@@ -69,7 +68,7 @@ class CustomerController extends Controller
         return view('settings.customers.edit', compact('customer'));
     }
 
-    public function migrate(Request $request, $id)
+    public function migrate($id)
     {
         $customer = Customer::findOrFail($id);
         $databaseService = new DatabaseService($customer->connection_name);
@@ -77,7 +76,7 @@ class CustomerController extends Controller
         return back()->with('success', 'Migration e seeder executados!');
     }
 
-    public function refresh(Request $request, $id)
+    public function refresh($id)
     {
         $customer = Customer::findOrFail($id);
         $databaseService = new DatabaseService($customer->connection_name);
@@ -94,7 +93,7 @@ class CustomerController extends Controller
         return back()->with('success', 'Migration e seeder executados!');
     }
 
-    public function seed(Request $request, $id)
+    public function seed($id)
     {
         $customer = Customer::findOrFail($id);
         $databaseService = new DatabaseService($customer->connection_name);
@@ -118,7 +117,7 @@ class CustomerController extends Controller
         return redirect()->route('settings.customers.index')->with('success', 'Empresa atualizada com sucesso!');
     }
 
-    public function destroy(Request $request, Customer $customer)
+    public function destroy(Customer $customer)
     {
         try {
             DB::beginTransaction();
